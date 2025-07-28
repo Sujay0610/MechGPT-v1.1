@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .message-bubble {
+    @apply max-w-xs lg:max-w-lg px-4 py-3 rounded-2xl shadow-sm;
+    animation: slideInMessage 0.3s ease-out;
+    transform-origin: bottom;
+  }
+  
+  .user-message {
+    @apply bg-gradient-to-r from-blue-500 to-blue-600 text-white ml-auto shadow-md rounded-br-md;
+    animation: slideInRight 0.3s ease-out;
+  }
+  
+  .bot-message {
+    @apply bg-white text-gray-800 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 rounded-bl-md;
+    animation: slideInLeft 0.3s ease-out;
+  }
+  
+  /* Widget-specific styles */
+  .chat-widget {
+    @apply bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden;
+    animation: fadeInScale 0.4s ease-out;
+  }
+  
+  .chat-widget-header {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 shadow-lg;
+    animation: slideInDown 0.3s ease-out;
+  }
+  
+  .chat-widget-messages {
+    @apply flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white;
+  }
+  
+  .chat-widget-input {
+    @apply bg-gray-50 p-4 border-t border-gray-100;
+    animation: slideInUp 0.3s ease-out;
+  }
+  
+  /* Animation keyframes */
+  @keyframes slideInMessage {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes slideInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Loading animation */
+  .loading-dots {
+    display: inline-block;
+  }
+  
+  .loading-dots span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #6b7280;
+    margin: 0 2px;
+    animation: bounce 1.4s infinite ease-in-out both;
+  }
+  
+  .loading-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+  
+  .loading-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+  
+  .loading-dots span:nth-child(3) {
+    animation-delay: 0;
+  }
+  
+  /* Button animations */
+  .animated-button {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .animated-button:hover {
+    transform: translateY(-1px);
+  }
+  
+  .animated-button:active {
+    transform: translateY(0);
+  }
+  
+  /* Sidebar animations */
+  .sidebar-item {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .sidebar-item:hover {
+    transform: translateX(4px);
+  }
+  
+  /* Page animations */
+  .page-container {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Input focus animations */
+  .animated-input {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .animated-input:focus {
+    transform: scale(1.01);
+  }
+  
+  /* Modal animations */
+  .modal-overlay {
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  .modal-content {
+    animation: slideInScale 0.3s ease-out;
+  }
+  
+  @keyframes slideInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  .upload-area {
+    @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors;
+  }
+  
+  .upload-area.dragover {
+    @apply border-blue-500 bg-blue-50;
+  }
+  
+  /* Markdown content styling */
+  .bot-message .prose {
+    @apply text-gray-800;
+  }
+  
+  .bot-message .prose strong {
+    @apply text-gray-900 font-semibold;
+  }
+  
+  .bot-message .prose ul,
+  .bot-message .prose ol {
+    @apply my-2;
+  }
+  
+  .bot-message .prose li {
+    @apply text-sm leading-relaxed;
+  }
+  
+  .bot-message .prose code {
+    @apply bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-xs;
+  }
+  
+  .bot-message .prose h1,
+  .bot-message .prose h2,
+  .bot-message .prose h3 {
+    @apply text-gray-900 font-semibold;
+  }
+}

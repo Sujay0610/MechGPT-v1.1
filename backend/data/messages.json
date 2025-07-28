@@ -1,0 +1,158 @@
+{
+  "a1b0ba11-247b-4bbc-a2cf-1d7607710ae6": [
+    {
+      "id": "c0038e66-dffb-4e89-a793-96592502bbdb",
+      "text": "list some spare",
+      "sender": "user",
+      "timestamp": "2025-07-27T17:59:02.355283",
+      "agent_name": "New",
+      "conversation_id": "a1b0ba11-247b-4bbc-a2cf-1d7607710ae6"
+    },
+    {
+      "id": "fc68935b-7f91-481d-b1c2-fd051b9b2987",
+      "text": "Here\u2019s a list of **critical spare parts** from the provided technical documentation, along with their **part numbers** for easy identification and ordering:\n\n### **Fuel Line Spares**\n- **Fuel Pump Suntec - E6**: Part No. 8220050000  \n- **Oil Seal - E6**: Part No. 8220090100  \n- **\"O\" Ring E6**: Part No. 8220030300  \n- **Plunger Spring - E6**: Part No. 8220090200  \n- **Spring Seal - E6**: Part No. 8220090200  \n\n### **Water Line Spares**\n- **Booster Pump**: Part No. 8110124600  \n- **Transparent Water Filter**: Part No. PGSX 710010  \n- **Filter Element - 60 MESH**: Part No. PGSX 71001A  \n- **Glass - Transparent Filter**: Part No. PGSX 71001B  \n\n### **Burner Assembly Spares**\n- **Photocell CEM -8205**: Part No. 8603111400  \n- **Solenoid Coil**: Part No. PGRX 241314  \n- **Ignition Electrode**: Part No. 8625111300  \n- **Ignition Transformer 14.05 kv**: Part No. 8606111100  \n\n### **Steam Line Spares**\n- **Main Stop Valve -1**: Part No. 9711102500  \n- **Safety Valve -1**: Part No. 9722122500  \n- **Pr. Gauge 0.25 kg/cm2**: Part No. 8451141800  \n\n### **Boiler Assembly Spares**\n- **Sequence Controller**: Part No. 8605111600  \n- **RTD for Steam & Booster Pump I/L**: Part No. 8412120900  \n- **Limit Switch for Blowdown Valve**: Part No. 8612112200  \n\n### **Safety Warnings**\n- **Always isolate the boiler system** before replacing parts to prevent accidents.  \n- **Use proper PPE** (Personal Protective Equipment) such as gloves and safety glasses during maintenance.  \n- **Refer to the manufacturer\u2019s manual** for specific installation and safety procedures.  \n\nIf you need further details on installation or troubleshooting, consult the **boiler operation manual** or seek assistance from a certified technician.",
+      "sender": "bot",
+      "timestamp": "2025-07-27T17:59:20.853457",
+      "agent_name": "New",
+      "conversation_id": "a1b0ba11-247b-4bbc-a2cf-1d7607710ae6"
+    }
+  ],
+  "fd216de7-94eb-4337-a90b-dc1e5be74d85": [
+    {
+      "id": "1539d458-10e5-45f5-a8d7-c04fc16d51a2",
+      "text": "lsit some spares",
+      "sender": "user",
+      "timestamp": "2025-07-27T18:01:52.031154",
+      "agent_name": "New",
+      "conversation_id": "fd216de7-94eb-4337-a90b-dc1e5be74d85"
+    },
+    {
+      "id": "b1f3aaf2-7860-4379-96bf-732e91392bd1",
+      "text": "Here\u2019s a list of **essential boiler spares** based on the provided technical documentation. Ensure you have these parts on hand for maintenance and troubleshooting:\n\n### **Fuel Line Spares**\n- **Fuel Pump Motor** (0.37kw, 2p) - Part No: 8323300500  \n- **Fuel Pump Suntec - E6** - Part No: 8220050000  \n- **Oil Seal - E6** - Part No: 8220090100  \n- **\"O\" Ring E6** - Part No: 8220030300  \n- **Simplex Oil Filter** - Part No: PGRX710410  \n- **Filter Element - 120 MESH** - Part No: PGRX710420  \n\n### **Water Line Spares**\n- **Booster Pump** - Part No: 8110124600  \n- **Transparent Water Filter** - Part No: PGSX 710010  \n- **Filter Element - 60 MESH** - Part No: PGSX 71001A  \n- **Glass - Transparent Filter** - Part No: PGSX 71001B  \n\n### **Burner Assembly Spares**\n- **Photocell CEM -8205** - Part No: 8603111400  \n- **Ignition Electrode** - Part No: 8625111300  \n- **Ignition Transformer 14.05 kv** - Part No: 8606111100  \n- **Nozzle Danfoss 45B 6GPH for SX-600/FO** - Part No: 8904131000  \n\n### **Steam Line Spares**\n- **Main Stop Valve -1** - Part No: 9711102500  \n- **Safety Valve -1.1/2\"** - Part No: PGRX711400  \n- **Pr. Gauge 0.25 kg/cm\u00b2** - Part No: 8451141800  \n\n### **Water Pump Spares**\n- **Gasket Packing (HTC -13)** - Part No: 811012470A  \n- **Oil Seal (HCA-5)** - Part No: 811012470J  \n- **Ball Bearing (HCA-5)** - Part No: 81101247 ok  \n\n### **Boiler Assembly Spares**\n- **Coil SX 600** - Part No: 312146620  \n- **Refractory Assembly SX 600** - Part No: PGSX 230010  \n- **Economiser With Heat Optimiser SX 600** - Part No: PGSX 270012  \n\n**Safety Note:** Always verify part numbers and compatibility with your specific boiler model before ordering or replacing components. Refer to the manufacturer\u2019s guidelines for installation and maintenance procedures.",
+      "sender": "bot",
+      "timestamp": "2025-07-27T18:01:58.747546",
+      "agent_name": "New",
+      "conversation_id": "fd216de7-94eb-4337-a90b-dc1e5be74d85"
+    }
+  ],
+  "af64dc7c-48fa-4196-a5a6-6e977ac2e196": [
+    {
+      "id": "b4afd8e6-6a24-4f6e-a348-aaf799db2027",
+      "text": "talk about UR10e and give official UR links",
+      "sender": "user",
+      "timestamp": "2025-07-28T18:54:28.270810",
+      "agent_name": "UR10e",
+      "conversation_id": "af64dc7c-48fa-4196-a5a6-6e977ac2e196"
+    },
+    {
+      "id": "c02693e1-3883-4bde-b18a-96fcfc6d8911",
+      "text": "The UR10e is a versatile collaborative robot designed for various applications like assembly, packaging, and quality inspection. It has a payload capacity of 10 kg and a reach of 1300 mm, making it suitable for a wide range of tasks. If you're looking for more detailed information or specific resources, you can check out the official Universal Robots website [here](https://www.universal-robots.com/products/ur10e/).\n\nWould you like to know more about its features, programming, or installation? I'm here to help!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T18:54:33.471002",
+      "agent_name": "UR10e",
+      "conversation_id": "af64dc7c-48fa-4196-a5a6-6e977ac2e196"
+    }
+  ],
+  "7f398e4d-8c5f-4881-a5a5-fa3634217b87": [
+    {
+      "id": "ae6ad865-af82-4f3f-81fb-234f4e1ac0b7",
+      "text": "talk about UR10e and give official UR links",
+      "sender": "user",
+      "timestamp": "2025-07-28T18:59:50.836757",
+      "agent_name": "UR10e",
+      "conversation_id": "7f398e4d-8c5f-4881-a5a5-fa3634217b87"
+    },
+    {
+      "id": "9e354c71-652e-4d7c-a441-74b98b4e3398",
+      "text": "The UR10e is a versatile collaborative robot designed for various applications, such as assembly, packaging, and quality inspection. It has a payload capacity of 10 kg and a reach of 1300 mm, making it suitable for a wide range of tasks. \n\nIf you're looking for more detailed information, here are some official links from Universal Robots that you might find helpful:\n\n- [UR10e - Universal Robots](https://www.universal-robots.com/products/ur10e/)\n- [Real-Time Data Exchange (RTDE) Guide - Universal Robots](https://www.universal-robots.com/articles/ur/interface-communication/real-time-data-exchange-rtde-guide/)\n- [User Manual - UR10e - Universal Robots](https://www.universal-robots.com/manuals/EN/PDF/SW5_19/user-manual-UR10e-PDF_online/711-039-00_UR10e_User_Manual_en_Global.pdf)\n\nLet me know if you need more specific information or have any questions!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T19:00:03.121316",
+      "agent_name": "UR10e",
+      "conversation_id": "7f398e4d-8c5f-4881-a5a5-fa3634217b87"
+    }
+  ],
+  "7844afef-dd4f-4679-a8a4-d1c6516c5615": [
+    {
+      "id": "7a5a1005-3625-4a7a-a9fa-3d4ff588733c",
+      "text": "talk about UR10e and give official UR links",
+      "sender": "user",
+      "timestamp": "2025-07-28T19:10:57.435514",
+      "agent_name": "UR10e",
+      "conversation_id": "7844afef-dd4f-4679-a8a4-d1c6516c5615"
+    },
+    {
+      "id": "efe97287-a855-4eef-8a73-2954df1c8274",
+      "text": "The UR10e is a versatile collaborative robot designed for various applications like assembly, packaging, and quality inspection. It has a payload capacity of 10 kg and a reach of 1300 mm, making it suitable for a wide range of tasks. \n\nIf you're looking for more detailed information, you can check out the official links below:\n\n- [UR10e - Universal Robots](https://www.universal-robots.com/products/ur10e/)\n- [User Manual - UR10e - Universal Robots](https://www.universal-robots.com/manuals/EN/PDF/SW5_19/user-manual-UR10e-PDF_online/711-039-00_UR10e_User_Manual_en_Global.pdf)\n\nLet me know if you need more specific details or have any questions!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T19:11:04.954929",
+      "agent_name": "UR10e",
+      "conversation_id": "7844afef-dd4f-4679-a8a4-d1c6516c5615"
+    }
+  ],
+  "2a4394b8-ee9d-4651-a959-ed14fc887086": [
+    {
+      "id": "7e90d6c6-08c9-4709-9a85-4ae3096df8ff",
+      "text": "how do I turn it on",
+      "sender": "user",
+      "timestamp": "2025-07-28T19:11:19.358388",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "80f68c04-f538-4969-917b-76833990916d",
+      "text": "To turn on the robot arm, you'll want to follow these steps:\n\n1. **Power on the robot arm** by ensuring it's connected to a power source.\n2. **Tap the red \"Initialize\" button** at the bottom left of the PolyScope interface.\n3. Once the initialization starts, tap **\"START\"** to release the brakes.\n\nAfter that, the robot should be ready for operation! If you need more detailed steps or have any questions about the process, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T19:11:22.314189",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "d6a0bb66-29a7-4374-baa9-c977465f325a",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-28T19:31:21.527042",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "d10e3986-25ee-4ed5-9083-765ec8a5fd4f",
+      "text": "Hey there! How can I assist you today? If you have any questions about the UR10e robot or need help with something specific, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T19:31:24.822128",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "3433f5cb-4f53-4688-b2f4-efe0b2fa13b6",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-28T19:33:59.957188",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "aa959c77-a72e-4cbe-8d0f-006008b9a604",
+      "text": "Hey there! How can I assist you today? If you have any questions about the UR10e robot or need help with something specific, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T19:34:07.126253",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "747e78f3-4c0e-441a-b6e0-8088ad2aa158",
+      "text": "give links on the robot manual",
+      "sender": "user",
+      "timestamp": "2025-07-28T19:34:13.601743",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "eb5f1247-0937-4348-8b11-ff8c6f9aa6ec",
+      "text": "Sure! Here are some helpful links to the robot manuals for the UR10e:\n\n- **UR10e User Manual**: This manual provides comprehensive information about the robot, including setup and operation. You can find it [here](https://www.universal-robots.com/manuals/711-039-00_UR10e_User_Manual_en_Global.pdf).\n  \n- **UR10e PolyScope X User Manual**: This manual covers the PolyScope software and system management features. Check it out [here](https://www.universal-robots.com/manuals/718-688-00_UR10e_PolyScope_X_User_Manual_PolyScopeX_en_Global.pdf).\n\nIf you need more specific information or have questions about certain sections, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T19:34:20.125525",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    }
+  ]
+}

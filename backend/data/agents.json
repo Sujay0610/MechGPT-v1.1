@@ -1,0 +1,32 @@
+{
+  "Boiler": {
+    "id": "c5e87217-de88-43c2-8765-198ebdeccddb",
+    "name": "Boiler",
+    "description": "Boiler agent - Revomax",
+    "collection_name": "agent_new",
+    "created_at": "2025-07-27T15:38:10.279694",
+    "updated_at": "2025-07-27T18:01:07.553613",
+    "total_chunks": 6,
+    "total_files": 2,
+    "files": [
+      "boiler-spare-parts.pdf",
+      "Revomax.pdf"
+    ]
+  },
+  "UR10e": {
+    "id": "ce9bf5da-3765-4756-bb0d-9fb700e94571",
+    "name": "UR10e",
+    "description": "No description provided",
+    "collection_name": "agent_ur10e",
+    "created_at": "2025-07-28T10:23:55.273827",
+    "updated_at": "2025-07-28T11:12:15.750799",
+    "total_chunks": 418,
+    "total_files": 4,
+    "files": [
+      "cable-suite_a4.pdf",
+      "718-688-00_UR10e PolyScope X_User_Manual_PolyScopeX_en_Global.pdf",
+      "ur10e_e-series_datasheets_web.pdf",
+      "711-039-00_UR10e_User_Manual_en_Global.pdf"
+    ]
+  }
+}
