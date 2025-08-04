@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException, Form, BackgroundTasks
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form, BackgroundTasks, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -22,11 +22,13 @@ from services.knowledge_base import KnowledgeBaseService
 from services.chat_service import ChatService
 from services.agent_service import AgentService
 from services.conversation_service import ConversationService
+from services.auth_service import AuthService
 from models.schemas import (
     ChatRequest, ChatResponse, UploadResponse,
     AgentCreate, Agent, AgentStats, AgentUploadRequest, AgentChatRequest,
     Conversation, ConversationHistory, ConversationMessage
 )
+from routes.auth import router as auth_router, get_current_user
 
 app = FastAPI(
     title="MechAgent RAG Backend",
@@ -48,6 +50,10 @@ pdf_parser = PDFParserService()
 knowledge_base = KnowledgeBaseService()
 agent_service = AgentService()
 conversation_service = ConversationService()
+auth_service = AuthService()
+
+# Include authentication routes
+app.include_router(auth_router)
 
 # Job tracking for background processing
 processing_jobs = {}
@@ -55,7 +61,7 @@ job_lock = threading.Lock()
 chat_service = ChatService(knowledge_base, agent_service)
 
 # Background processing function
-async def process_files_background(job_id: str, agent_name: str, files_data: List[dict]):
+async def process_files_background(job_id: str, agent_name: str, files_data: List[dict], user_id: str = None):
     """Process files in the background"""
     try:
         with job_lock:
@@ -107,7 +113,7 @@ async def process_files_background(job_id: str, agent_name: str, files_data: Lis
                     await f.write(json.dumps(chunks, indent=2))
                 
                 # Index chunks in agent's knowledge base
-                added_chunks = await agent_service.add_chunks_to_agent(agent_name, chunks, filename)
+                added_chunks = await agent_service.add_chunks_to_agent(agent_name, chunks, filename, user_id)
                 
                 with job_lock:
                     processing_jobs[job_id]["processed_files"].append({
@@ -172,15 +178,64 @@ Path("data").mkdir(exist_ok=True)
 async def root():
     return {"message": "MechAgent RAG Backend API", "status": "running"}
 
+# Temporary test endpoint for debugging agent creation
+@app.post("/api/test-agent-creation")
+async def test_agent_creation():
+    """Test agent creation without authentication for debugging"""
+    try:
+        # Use the pre-created test user ID
+        test_user_id = "12345678-1234-1234-1234-123456789012"
+        
+        # Create the agent with the existing test user
+        result = await agent_service.create_agent(
+            "test-agent", 
+            "Test agent for debugging", 
+            "Test instructions",
+            user_id=test_user_id
+        )
+        return result
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
 # Agent Management Endpoints
 @app.post("/api/agents", response_model=Agent)
-async def create_agent(agent_data: AgentCreate):
+async def create_agent(agent_data: AgentCreate, current_user: dict = Depends(get_current_user)):
     """
     Create a new agent with its own knowledge base
     """
     try:
-        agent = await agent_service.create_agent(agent_data.name, agent_data.description)
-        return agent
+        result = await agent_service.create_agent(
+            agent_data.name, 
+            agent_data.description, 
+            agent_data.extra_instructions,
+            user_id=current_user['id']
+        )
+        
+        if not result.get('success'):
+            raise HTTPException(status_code=400, detail=result.get('message', 'Failed to create agent'))
+        
+        # Extract agent data from the result
+        agent_data = result.get('agent')
+        if not agent_data:
+            raise HTTPException(status_code=500, detail='Agent created but no data returned')
+        
+        # Map database fields to expected schema fields
+        mapped_agent = {
+            "id": agent_data.get("id", ""),
+            "name": agent_data.get("name", ""),
+            "description": agent_data.get("description", ""),
+            "extra_instructions": agent_data.get("extra_instructions", ""),
+            "collection_name": agent_data.get("namespace", ""),
+            "created_at": agent_data.get("created_at", ""),
+            "updated_at": agent_data.get("updated_at", ""),
+            "total_chunks": agent_data.get("chunk_count", 0),
+            "total_files": agent_data.get("document_count", 0),
+            "files": agent_data.get("files", [])
+        }
+        
+        return mapped_agent
+    except HTTPException:
+        raise
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -188,24 +243,24 @@ async def create_agent(agent_data: AgentCreate):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/agents", response_model=List[Agent])
-async def get_agents():
+async def get_agents(current_user: dict = Depends(get_current_user)):
     """
     Get list of all agents
     """
     try:
-        agents = await agent_service.get_agents()
+        agents = await agent_service.get_agents(user_id=current_user['id'])
         return agents
     except Exception as e:
         print(f"Error getting agents: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/agents/{agent_name}", response_model=Agent)
-async def get_agent(agent_name: str):
+async def get_agent(agent_name: str, current_user: dict = Depends(get_current_user)):
     """
     Get specific agent by name
     """
     try:
-        agent = await agent_service.get_agent(agent_name)
+        agent = await agent_service.get_agent(agent_name, user_id=current_user['id'])
         if not agent:
             raise HTTPException(status_code=404, detail=f"Agent '{agent_name}' not found")
         return agent
@@ -216,12 +271,12 @@ async def get_agent(agent_name: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.delete("/api/agents/{agent_name}")
-async def delete_agent(agent_name: str):
+async def delete_agent(agent_name: str, current_user: dict = Depends(get_current_user)):
     """
     Delete an agent and its knowledge base
     """
     try:
-        success = await agent_service.delete_agent(agent_name)
+        success = await agent_service.delete_agent(agent_name, user_id=current_user['id'])
         if not success:
             raise HTTPException(status_code=404, detail=f"Agent '{agent_name}' not found")
         return {"message": f"Agent '{agent_name}' deleted successfully"}
@@ -232,12 +287,12 @@ async def delete_agent(agent_name: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/agents/{agent_name}/stats", response_model=AgentStats)
-async def get_agent_stats(agent_name: str):
+async def get_agent_stats(agent_name: str, current_user: dict = Depends(get_current_user)):
     """
     Get statistics for a specific agent
     """
     try:
-        stats = await agent_service.get_agent_stats(agent_name)
+        stats = await agent_service.get_agent_stats(agent_name, user_id=current_user['id'])
         if "error" in stats:
             raise HTTPException(status_code=404, detail=stats["error"])
         return stats
@@ -248,13 +303,13 @@ async def get_agent_stats(agent_name: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/agents/{agent_name}/upload")
-async def upload_files_to_agent(agent_name: str, background_tasks: BackgroundTasks, files: List[UploadFile] = File(...)):
+async def upload_files_to_agent(agent_name: str, background_tasks: BackgroundTasks, files: List[UploadFile] = File(...), current_user: dict = Depends(get_current_user)):
     """
     Upload and process files for a specific agent (background processing)
     """
     try:
         # Check if agent exists
-        agent = await agent_service.get_agent(agent_name)
+        agent = await agent_service.get_agent(agent_name, user_id=current_user['id'])
         if not agent:
             raise HTTPException(status_code=404, detail=f"Agent '{agent_name}' not found")
         
@@ -284,7 +339,7 @@ async def upload_files_to_agent(agent_name: str, background_tasks: BackgroundTas
             raise HTTPException(status_code=400, detail="No valid PDF files found")
         
         # Start background processing
-        background_tasks.add_task(process_files_background, job_id, agent_name, files_data)
+        background_tasks.add_task(process_files_background, job_id, agent_name, files_data, current_user['id'])
         
         return {
             "success": True,
@@ -299,8 +354,125 @@ async def upload_files_to_agent(agent_name: str, background_tasks: BackgroundTas
         print(f"Upload error: {e}")
         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
+@app.post("/api/agents/{agent_name}/text")
+async def upload_text_to_agent(agent_name: str, request: dict, current_user: dict = Depends(get_current_user)):
+    """
+    Add text content to a specific agent's knowledge base
+    """
+    try:
+        # Check if agent exists
+        agent = await agent_service.get_agent(agent_name, user_id=current_user['id'])
+        if not agent:
+            raise HTTPException(status_code=404, detail=f"Agent '{agent_name}' not found")
+        
+        content = request.get('content', '').strip()
+        title = request.get('title', 'Text Content').strip()
+        
+        if not content:
+            raise HTTPException(status_code=400, detail="No content provided")
+        
+        # Create chunks from text content
+        chunks = await pdf_parser.parse_text(content, title)
+        
+        if not chunks:
+            raise HTTPException(status_code=400, detail="Failed to process text content")
+        
+        # Add chunks to agent's knowledge base
+        added_chunks = await agent_service.add_chunks_to_agent(agent_name, chunks, f"{title}.txt", current_user['id'])
+        
+        return {
+            "success": True,
+            "message": f"Successfully processed text content. Added {len(chunks)} chunks to {agent_name}'s knowledge base.",
+            "chunks_added": added_chunks,
+            "total_chunks": len(chunks)
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Text processing error: {e}")
+        raise HTTPException(status_code=500, detail=f"Text processing failed: {str(e)}")
+
+@app.post("/api/agents/{agent_name}/crawl")
+async def crawl_links_for_agent(agent_name: str, request: dict, current_user: dict = Depends(get_current_user)):
+    """
+    Crawl URLs and add content to a specific agent's knowledge base
+    """
+    try:
+        # Check if agent exists
+        agent = await agent_service.get_agent(agent_name, user_id=current_user['id'])
+        if not agent:
+            raise HTTPException(status_code=404, detail=f"Agent '{agent_name}' not found")
+        
+        urls = request.get('urls', [])
+        
+        if not urls:
+            raise HTTPException(status_code=400, detail="No URLs provided")
+        
+        # Crawl and process URLs
+        all_chunks = []
+        processed_files = []
+        failed_urls = []
+        
+        for url in urls:
+            try:
+                chunks = await pdf_parser.parse_url(url)
+                if chunks:
+                    all_chunks.extend(chunks)
+                    processed_files.append(f"{url}.html")
+                else:
+                    failed_urls.append(url)
+            except Exception as e:
+                print(f"Failed to crawl {url}: {e}")
+                failed_urls.append(url)
+                continue
+        
+        if not all_chunks:
+            raise HTTPException(status_code=400, detail="Failed to extract content from any of the provided URLs")
+        
+        # Add chunks to agent's knowledge base
+        added_chunks = await agent_service.add_chunks_to_agent(agent_name, all_chunks, processed_files, current_user['id'])
+        
+        response_message = f"Successfully crawled and processed {len(processed_files)} URL(s). Added {len(all_chunks)} chunks to {agent_name}'s knowledge base."
+        if failed_urls:
+            response_message += f" Failed to process {len(failed_urls)} URL(s)."
+        
+        return {
+            "success": True,
+            "message": response_message,
+            "processed_urls": len(processed_files),
+            "failed_urls": len(failed_urls),
+            "chunks_added": added_chunks,
+            "total_chunks": len(all_chunks)
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"URL crawling error: {e}")
+        raise HTTPException(status_code=500, detail=f"URL crawling failed: {str(e)}")
+
+@app.post("/api/agents/{agent_name}/reindex")
+async def reindex_agent_knowledge_base(agent_name: str, current_user: dict = Depends(get_current_user)):
+    """
+    Reindex an agent's knowledge base by clearing and rebuilding it
+    """
+    try:
+        result = await agent_service.reindex_agent_knowledge_base(agent_name, current_user['id'])
+        
+        if not result["success"]:
+            raise HTTPException(status_code=500, detail=result["error"])
+        
+        return result
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Reindexing error: {e}")
+        raise HTTPException(status_code=500, detail=f"Reindexing failed: {str(e)}")
+
 @app.get("/api/agents/{agent_name}/upload/status/{job_id}")
-async def get_upload_status(agent_name: str, job_id: str):
+async def get_upload_status(agent_name: str, job_id: str, current_user: dict = Depends(get_current_user)):
     """
     Get the status of a background upload job
     """
@@ -313,13 +485,13 @@ async def get_upload_status(agent_name: str, job_id: str):
     return job
 
 @app.post("/api/agents/{agent_name}/chat", response_model=ChatResponse)
-async def chat_with_agent(agent_name: str, request: AgentChatRequest):
+async def chat_with_agent(agent_name: str, request: AgentChatRequest, current_user: dict = Depends(get_current_user)):
     """
     Chat with a specific agent using its knowledge base
     """
     try:
         # Check if agent exists
-        agent = await agent_service.get_agent(agent_name)
+        agent = await agent_service.get_agent(agent_name, user_id=current_user['id'])
         if not agent:
             raise HTTPException(status_code=404, detail=f"Agent '{agent_name}' not found")
         
@@ -327,20 +499,21 @@ async def chat_with_agent(agent_name: str, request: AgentChatRequest):
         conversation_id = request.conversation_id
         if not conversation_id:
             # Create new conversation
-            conversation_id = await conversation_service.create_conversation(agent_name, request.message)
+            conversation_id = await conversation_service.create_conversation(agent_name, request.message, current_user['id'])
         
         # Add user message to conversation
-        await conversation_service.add_message(conversation_id, request.message, "user", agent_name)
+        await conversation_service.add_message(conversation_id, request.message, "user", agent_name, current_user['id'])
         
         # Get response from chat service
         response = await chat_service.get_response(
             message=request.message,
             conversation_id=conversation_id,
-            agent_id=agent_name
+            agent_id=agent_name,
+            user_id=current_user['id']
         )
         
         # Add bot response to conversation
-        await conversation_service.add_message(conversation_id, response.response, "bot", agent_name)
+        await conversation_service.add_message(conversation_id, response.response, "bot", agent_name, current_user['id'])
         
         # Add conversation_id to response
         response.conversation_id = conversation_id
@@ -413,16 +586,35 @@ async def upload_files(files: List[UploadFile] = File(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest):
+async def chat(request: ChatRequest, current_user: dict = Depends(get_current_user)):
     """
-    Process chat messages and return RAG-based responses
+    Process chat messages and return RAG-based responses with conversation history
     """
     try:
         if not request.message.strip():
             raise HTTPException(status_code=400, detail="Message cannot be empty")
         
+        # Handle conversation creation/continuation
+        conversation_id = request.conversation_id
+        if not conversation_id:
+            # Create new conversation with "General" as agent name
+            conversation_id = await conversation_service.create_conversation("General", request.message, current_user['id'])
+        
+        # Add user message to conversation
+        await conversation_service.add_message(conversation_id, request.message, "user", "General", current_user['id'])
+        
         # Get response from chat service
-        response = await chat_service.get_response(request.message)
+        response = await chat_service.get_response(
+            message=request.message,
+            conversation_id=conversation_id,
+            user_id=current_user['id']
+        )
+        
+        # Add bot response to conversation
+        await conversation_service.add_message(conversation_id, response.response, "bot", "General", current_user['id'])
+        
+        # Add conversation_id to response
+        response.conversation_id = conversation_id
         
         return response
         
@@ -475,17 +667,17 @@ async def get_status():
 
 # Conversation Management Endpoints
 @app.get("/api/agents/{agent_name}/conversations", response_model=List[Conversation])
-async def get_agent_conversations(agent_name: str):
+async def get_agent_conversations(agent_name: str, current_user: dict = Depends(get_current_user)):
     """
     Get all conversations for a specific agent
     """
     try:
         # Check if agent exists
-        agent = await agent_service.get_agent(agent_name)
+        agent = await agent_service.get_agent(agent_name, user_id=current_user['id'])
         if not agent:
             raise HTTPException(status_code=404, detail=f"Agent '{agent_name}' not found")
         
-        conversations = await conversation_service.get_agent_conversations(agent_name)
+        conversations = await conversation_service.get_agent_conversations(agent_name, current_user['id'])
         return conversations
         
     except HTTPException:
@@ -495,12 +687,12 @@ async def get_agent_conversations(agent_name: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/conversations/{conversation_id}", response_model=ConversationHistory)
-async def get_conversation_history(conversation_id: str):
+async def get_conversation_history(conversation_id: str, current_user: dict = Depends(get_current_user)):
     """
     Get full conversation history including messages
     """
     try:
-        history = await conversation_service.get_conversation_history(conversation_id)
+        history = await conversation_service.get_conversation_history(conversation_id, user_id=current_user['id'])
         if not history:
             raise HTTPException(status_code=404, detail=f"Conversation '{conversation_id}' not found")
         
@@ -513,12 +705,12 @@ async def get_conversation_history(conversation_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.delete("/api/conversations/{conversation_id}")
-async def delete_conversation(conversation_id: str):
+async def delete_conversation(conversation_id: str, current_user: dict = Depends(get_current_user)):
     """
     Delete a conversation and all its messages
     """
     try:
-        success = await conversation_service.delete_conversation(conversation_id)
+        success = await conversation_service.delete_conversation(conversation_id, user_id=current_user['id'])
         if not success:
             raise HTTPException(status_code=404, detail=f"Conversation '{conversation_id}' not found")
         

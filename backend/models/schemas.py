@@ -52,11 +52,13 @@ class CrawlResponse(BaseModel):
 class AgentCreate(BaseModel):
     name: str
     description: Optional[str] = ""
+    extra_instructions: Optional[str] = ""
 
 class Agent(BaseModel):
     id: str
     name: str
     description: str
+    extra_instructions: str
     collection_name: str
     created_at: str
     updated_at: str
@@ -72,6 +74,7 @@ class AgentStats(BaseModel):
     created_at: str
     updated_at: str
     description: str
+    extra_instructions: str
 
 class AgentUploadRequest(BaseModel):
     agent_name: str

@@ -4,36 +4,59 @@ import asyncio
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 from pathlib import Path
-import chromadb
-from chromadb.config import Settings
+from pinecone import Pinecone, ServerlessSpec
 from sentence_transformers import SentenceTransformer
 import uuid
+import time
 
 class KnowledgeBaseService:
     def __init__(self):
-        # Initialize ChromaDB
-        self.chroma_client = chromadb.PersistentClient(
-            path="./data/chroma_db",
-            settings=Settings(
-                anonymized_telemetry=False,
-                allow_reset=True
-            )
-        )
+        # Initialize Pinecone
+        self.pinecone_api_key = os.getenv('PINECONE_API_KEY')
+        if not self.pinecone_api_key:
+            raise ValueError("PINECONE_API_KEY environment variable is required")
         
-        # Get or create collection
-        self.collection_name = "mechagent_knowledge_base"
-        try:
-            self.collection = self.chroma_client.get_collection(self.collection_name)
-        except:
-            self.collection = self.chroma_client.create_collection(
-                name=self.collection_name,
-                metadata={"description": "MechAgent RAG Knowledge Base"}
-            )
+        self.pc = Pinecone(api_key=self.pinecone_api_key)
+        
+        # Index configuration
+        self.index_name = "mechagent-knowledge-base"
+        self.dimension = 384  # all-MiniLM-L6-v2 embedding dimension
         
         # Initialize embedding model
         self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         
-        print(f"Knowledge base initialized with collection: {self.collection_name}")
+        # Create or connect to index
+        self._setup_index()
+        
+        print(f"Knowledge base initialized with Pinecone index: {self.index_name}")
+    
+    def _setup_index(self):
+        """Setup Pinecone index"""
+        try:
+            # Check if index exists
+            existing_indexes = [index.name for index in self.pc.list_indexes()]
+            
+            if self.index_name not in existing_indexes:
+                # Create new index
+                self.pc.create_index(
+                    name=self.index_name,
+                    dimension=self.dimension,
+                    metric='cosine',
+                    spec=ServerlessSpec(
+                        cloud='aws',
+                        region='us-east-1'
+                    )
+                )
+                # Wait for index to be ready
+                while not self.pc.describe_index(self.index_name).status['ready']:
+                    time.sleep(1)
+            
+            # Connect to index
+            self.index = self.pc.Index(self.index_name)
+            
+        except Exception as e:
+            print(f"Error setting up Pinecone index: {e}")
+            raise
     
     async def add_chunks(self, chunks: List[Dict[str, Any]]) -> int:
         """
@@ -43,10 +66,8 @@ class KnowledgeBaseService:
             return 0
         
         try:
-            # Prepare data for ChromaDB
-            texts = []
-            metadatas = []
-            ids = []
+            # Prepare data for Pinecone
+            vectors_to_upsert = []
             
             for chunk in chunks:
                 text = chunk.get('text', '').strip()
@@ -56,33 +77,38 @@ class KnowledgeBaseService:
                 chunk_id = chunk.get('chunk_id') or str(uuid.uuid4())
                 metadata = chunk.get('metadata', {})
                 
-                # Ensure metadata is JSON serializable
+                # Ensure metadata is compatible with Pinecone
                 clean_metadata = self._clean_metadata(metadata)
+                # Add the text to metadata for retrieval
+                clean_metadata['text'] = text
                 
-                texts.append(text)
-                metadatas.append(clean_metadata)
-                ids.append(chunk_id)
+                # Generate embedding
+                embedding = await asyncio.to_thread(
+                    self.embedding_model.encode, 
+                    text, 
+                    convert_to_tensor=False
+                )
+                
+                vectors_to_upsert.append({
+                    'id': chunk_id,
+                    'values': embedding.tolist(),
+                    'metadata': clean_metadata
+                })
             
-            if not texts:
+            if not vectors_to_upsert:
                 return 0
             
-            # Generate embeddings
-            embeddings = await asyncio.to_thread(
-                self.embedding_model.encode, 
-                texts, 
-                convert_to_tensor=False
-            )
+            # Upsert vectors to Pinecone in batches
+            batch_size = 100
+            total_upserted = 0
             
-            # Add to ChromaDB
-            self.collection.add(
-                documents=texts,
-                metadatas=metadatas,
-                ids=ids,
-                embeddings=embeddings.tolist()
-            )
+            for i in range(0, len(vectors_to_upsert), batch_size):
+                batch = vectors_to_upsert[i:i + batch_size]
+                self.index.upsert(vectors=batch)
+                total_upserted += len(batch)
             
-            print(f"Added {len(texts)} chunks to knowledge base")
-            return len(texts)
+            print(f"Added {total_upserted} chunks to Pinecone knowledge base")
+            return total_upserted
             
         except Exception as e:
             print(f"Error adding chunks to knowledge base: {e}")
@@ -96,31 +122,29 @@ class KnowledgeBaseService:
             # Generate query embedding
             query_embedding = await asyncio.to_thread(
                 self.embedding_model.encode, 
-                [query], 
+                query, 
                 convert_to_tensor=False
             )
             
-            # Search ChromaDB
-            results = self.collection.query(
-                query_embeddings=query_embedding.tolist(),
-                n_results=top_k,
-                include=["documents", "metadatas", "distances"]
+            # Search Pinecone
+            results = self.index.query(
+                vector=query_embedding.tolist(),
+                top_k=top_k,
+                include_metadata=True
             )
             
             # Format results
             search_results = []
-            if results['documents'] and results['documents'][0]:
-                for i, (doc, metadata, distance) in enumerate(zip(
-                    results['documents'][0],
-                    results['metadatas'][0],
-                    results['distances'][0]
-                )):
-                    search_results.append({
-                        "text": doc,
-                        "metadata": metadata,
-                        "similarity_score": 1 - distance,  # Convert distance to similarity
-                        "rank": i + 1
-                    })
+            for i, match in enumerate(results['matches']):
+                metadata = match.get('metadata', {})
+                text = metadata.pop('text', '')  # Remove text from metadata for clean response
+                
+                search_results.append({
+                    "text": text,
+                    "metadata": metadata,
+                    "similarity_score": match['score'],
+                    "rank": i + 1
+                })
             
             return search_results
             
@@ -133,12 +157,18 @@ class KnowledgeBaseService:
         Reindex all parsed content from the parsed directory
         """
         try:
-            # Clear existing collection
-            self.chroma_client.delete_collection(self.collection_name)
-            self.collection = self.chroma_client.create_collection(
-                name=self.collection_name,
-                metadata={"description": "MechAgent RAG Knowledge Base"}
-            )
+            # Delete all vectors in the index (clear existing data)
+            # Pinecone doesn't have a direct "clear all" method, so we'll delete by namespace
+            # or recreate the index if needed
+            try:
+                # Get all vector IDs and delete them
+                stats = self.index.describe_index_stats()
+                if stats['total_vector_count'] > 0:
+                    # For simplicity, we'll delete and recreate the index
+                    self.pc.delete_index(self.index_name)
+                    self._setup_index()
+            except Exception as e:
+                print(f"Warning: Could not clear existing index: {e}")
             
             # Load all parsed files
             parsed_dir = Path("parsed")
@@ -169,24 +199,25 @@ class KnowledgeBaseService:
         Get knowledge base statistics
         """
         try:
-            # Get collection count
-            count = self.collection.count()
+            # Get index stats
+            stats = self.index.describe_index_stats()
             
-            # Get unique files
-            all_metadata = self.collection.get(include=["metadatas"])
+            # Get unique files by querying metadata
+            # Note: This is a simplified approach. In production, you might want to
+            # maintain a separate metadata store for more efficient stats
             unique_files = set()
             
-            if all_metadata['metadatas']:
-                for metadata in all_metadata['metadatas']:
-                    if 'filename' in metadata:
-                        unique_files.add(metadata['filename'])
+            # For now, we'll estimate based on available stats
+            # In a production setup, you might want to maintain file counts separately
             
             return {
-                "total_chunks": count,
-                "total_files": len(unique_files),
-                "collection_name": self.collection_name,
+                "total_chunks": stats.get('total_vector_count', 0),
+                "total_files": "estimated",  # Pinecone doesn't provide easy file counting
+                "index_name": self.index_name,
                 "embedding_model": "all-MiniLM-L6-v2",
-                "last_updated": datetime.now().isoformat()
+                "dimension": self.dimension,
+                "last_updated": datetime.now().isoformat(),
+                "index_stats": stats
             }
             
         except Exception as e:
@@ -199,17 +230,26 @@ class KnowledgeBaseService:
     
     def _clean_metadata(self, metadata: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Clean metadata to ensure it's JSON serializable for ChromaDB
+        Clean metadata to ensure it's compatible with Pinecone
+        Pinecone has specific requirements for metadata:
+        - Values must be strings, numbers, booleans, or lists of strings
+        - Metadata size limit is 40KB per vector
         """
         clean_metadata = {}
         
         for key, value in metadata.items():
+            # Pinecone metadata key restrictions
+            clean_key = str(key).replace('.', '_').replace('$', '_')
+            
             if isinstance(value, (str, int, float, bool)):
-                clean_metadata[key] = value
+                clean_metadata[clean_key] = value
             elif isinstance(value, datetime):
-                clean_metadata[key] = value.isoformat()
+                clean_metadata[clean_key] = value.isoformat()
+            elif isinstance(value, list):
+                # Convert list to string representation
+                clean_metadata[clean_key] = str(value)
             else:
-                clean_metadata[key] = str(value)
+                clean_metadata[clean_key] = str(value)
         
         return clean_metadata
     
@@ -218,15 +258,37 @@ class KnowledgeBaseService:
         Delete all chunks associated with a specific filename
         """
         try:
-            # Get all items with the specified filename
-            results = self.collection.get(
-                where={"filename": filename},
-                include=["metadatas"]
+            # Query vectors with the specified filename
+            # Note: Pinecone doesn't support direct metadata filtering for deletion
+            # We need to query first, then delete by IDs
+            
+            # This is a simplified approach - in production you might want to
+            # maintain a mapping of filenames to vector IDs
+            
+            # Query to find vectors with this filename
+            # Since we can't directly filter by metadata in query, we'll use a dummy vector
+            dummy_vector = [0.0] * self.dimension
+            
+            results = self.index.query(
+                vector=dummy_vector,
+                top_k=10000,  # Large number to get all results
+                include_metadata=True,
+                filter={"filename": filename}
             )
             
-            if results['ids']:
-                self.collection.delete(ids=results['ids'])
-                return len(results['ids'])
+            if results['matches']:
+                ids_to_delete = [match['id'] for match in results['matches']]
+                
+                # Delete in batches
+                batch_size = 1000
+                total_deleted = 0
+                
+                for i in range(0, len(ids_to_delete), batch_size):
+                    batch_ids = ids_to_delete[i:i + batch_size]
+                    self.index.delete(ids=batch_ids)
+                    total_deleted += len(batch_ids)
+                
+                return total_deleted
             
             return 0
             

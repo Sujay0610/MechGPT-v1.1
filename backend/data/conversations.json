@@ -1,50 +1,386 @@
 {
-  "a1b0ba11-247b-4bbc-a2cf-1d7607710ae6": {
-    "id": "a1b0ba11-247b-4bbc-a2cf-1d7607710ae6",
-    "agent_name": "New",
-    "title": "list some spare",
-    "created_at": "2025-07-27T17:59:02.343256",
-    "updated_at": "2025-07-27T17:59:20.854455",
-    "message_count": 2
-  },
-  "fd216de7-94eb-4337-a90b-dc1e5be74d85": {
-    "id": "fd216de7-94eb-4337-a90b-dc1e5be74d85",
-    "agent_name": "New",
-    "title": "lsit some spares",
-    "created_at": "2025-07-27T18:01:52.018643",
-    "updated_at": "2025-07-27T18:01:58.749052",
-    "message_count": 2
-  },
-  "af64dc7c-48fa-4196-a5a6-6e977ac2e196": {
-    "id": "af64dc7c-48fa-4196-a5a6-6e977ac2e196",
-    "agent_name": "UR10e",
-    "title": "talk about UR10e and give official UR links",
-    "created_at": "2025-07-28T18:54:28.133210",
-    "updated_at": "2025-07-28T18:54:33.473005",
-    "message_count": 2
-  },
-  "7f398e4d-8c5f-4881-a5a5-fa3634217b87": {
-    "id": "7f398e4d-8c5f-4881-a5a5-fa3634217b87",
-    "agent_name": "UR10e",
-    "title": "talk about UR10e and give official UR links",
-    "created_at": "2025-07-28T18:59:49.931484",
-    "updated_at": "2025-07-28T19:00:03.122315",
-    "message_count": 2
-  },
-  "7844afef-dd4f-4679-a8a4-d1c6516c5615": {
-    "id": "7844afef-dd4f-4679-a8a4-d1c6516c5615",
-    "agent_name": "UR10e",
-    "title": "talk about UR10e and give official UR links",
-    "created_at": "2025-07-28T19:10:57.417969",
-    "updated_at": "2025-07-28T19:11:04.962937",
-    "message_count": 2
-  },
   "2a4394b8-ee9d-4651-a959-ed14fc887086": {
     "id": "2a4394b8-ee9d-4651-a959-ed14fc887086",
     "agent_name": "UR10e",
     "title": "how do I turn it on",
     "created_at": "2025-07-28T19:11:19.343825",
-    "updated_at": "2025-07-28T19:34:20.135543",
-    "message_count": 8
+    "updated_at": "2025-07-28T20:51:52.393024",
+    "message_count": 14
+  },
+  "d373385f-5b6b-4ed5-8e6d-61e40b4e6562": {
+    "id": "d373385f-5b6b-4ed5-8e6d-61e40b4e6562",
+    "agent_name": "UR10e",
+    "title": "how to setup the bot",
+    "created_at": "2025-07-28T20:52:50.966003",
+    "updated_at": "2025-07-28T20:52:56.676146",
+    "message_count": 2
+  },
+  "3f5b16aa-0b10-492e-b7c5-d7ea0b1425a3": {
+    "id": "3f5b16aa-0b10-492e-b7c5-d7ea0b1425a3",
+    "agent_name": "UR10e",
+    "title": "What is the maximum payload and reach of the UR10e...",
+    "created_at": "2025-07-29T13:08:15.598889",
+    "updated_at": "2025-07-29T13:08:21.570265",
+    "message_count": 2
+  },
+  "b00ffbc6-c4c1-4d6e-99c7-deee97bbf2d4": {
+    "id": "b00ffbc6-c4c1-4d6e-99c7-deee97bbf2d4",
+    "agent_name": "UR10e",
+    "title": "How do I configure safety planes on the UR10e?",
+    "created_at": "2025-07-29T13:08:42.626501",
+    "updated_at": "2025-07-29T13:08:49.364337",
+    "message_count": 2
+  },
+  "7bbbb013-d0f1-4903-bfd0-05b7ce184618": {
+    "id": "7bbbb013-d0f1-4903-bfd0-05b7ce184618",
+    "agent_name": "UR10e",
+    "title": "Explain how to set up emergency stop and enabling ...",
+    "created_at": "2025-07-29T13:09:07.833371",
+    "updated_at": "2025-07-29T13:09:13.700070",
+    "message_count": 2
+  },
+  "d6800899-aef3-46a3-8b18-bf000d7d90f2": {
+    "id": "d6800899-aef3-46a3-8b18-bf000d7d90f2",
+    "agent_name": "UR10e",
+    "title": "Show me installation steps for the UR10e control b...",
+    "created_at": "2025-07-29T13:09:32.935612",
+    "updated_at": "2025-07-29T13:09:39.093930",
+    "message_count": 2
+  },
+  "53b2215e-b600-46a4-b9ab-a627f864e32f": {
+    "id": "53b2215e-b600-46a4-b9ab-a627f864e32f",
+    "agent_name": "UR10e",
+    "title": "Can you link me to the latest UR10e e\u2011Series user ...",
+    "created_at": "2025-07-29T13:10:06.451245",
+    "updated_at": "2025-07-29T13:18:29.180262",
+    "message_count": 4
+  },
+  "36f933a0-a12d-49a2-b92f-ace39eeb0fe8": {
+    "id": "36f933a0-a12d-49a2-b92f-ace39eeb0fe8",
+    "agent_name": "TA1900",
+    "title": "What is the collision detection or flex-servo cont...",
+    "created_at": "2025-07-29T13:12:18.899152",
+    "updated_at": "2025-07-29T13:12:23.652065",
+    "message_count": 2
+  },
+  "a7dd6c9f-2026-4d13-8eb8-eb5b9443af98": {
+    "id": "a7dd6c9f-2026-4d13-8eb8-eb5b9443af98",
+    "agent_name": "TA1900",
+    "title": "where to download the TA/TB series robot manual PD...",
+    "created_at": "2025-07-29T13:13:48.096940",
+    "updated_at": "2025-07-29T13:13:52.696356",
+    "message_count": 2
+  },
+  "622f7847-9609-421f-b4d4-f5306f6428e5": {
+    "id": "622f7847-9609-421f-b4d4-f5306f6428e5",
+    "agent_name": "TA1900",
+    "title": "List available TA\u20111900 variants and differences (l...",
+    "created_at": "2025-07-29T13:14:22.899543",
+    "updated_at": "2025-07-29T13:14:27.372849",
+    "message_count": 2
+  },
+  "4eb06f71-46eb-47c6-b064-151cc4e05527": {
+    "id": "4eb06f71-46eb-47c6-b064-151cc4e05527",
+    "agent_name": "TA1900",
+    "title": "Can you search the web for FAQs or troubleshooting...",
+    "created_at": "2025-07-29T13:14:51.123970",
+    "updated_at": "2025-07-29T13:14:55.908575",
+    "message_count": 2
+  },
+  "7cc1fcdf-8fd2-492f-b4cd-1c2982536c2a": {
+    "id": "7cc1fcdf-8fd2-492f-b4cd-1c2982536c2a",
+    "agent_name": "TA1900",
+    "title": "yes give step by step guidance on payload upgradin...",
+    "created_at": "2025-07-29T13:15:22.692593",
+    "updated_at": "2025-07-29T13:15:28.356071",
+    "message_count": 2
+  },
+  "1dc83b3a-3d04-4359-874d-8cec86ec5545": {
+    "id": "1dc83b3a-3d04-4359-874d-8cec86ec5545",
+    "agent_name": "TA1900",
+    "title": "Locate the community forum where TA\u2011series manuals...",
+    "created_at": "2025-07-29T13:17:00.906811",
+    "updated_at": "2025-07-29T13:17:05.639735",
+    "message_count": 2
+  },
+  "6c64e35f-6d23-4b01-9d27-5ca896dda0c3": {
+    "id": "6c64e35f-6d23-4b01-9d27-5ca896dda0c3",
+    "agent_name": "TA1900",
+    "title": "How to access wiring diagrams for the YA\u20111WAR cont...",
+    "created_at": "2025-07-29T13:20:29.947112",
+    "updated_at": "2025-07-29T13:20:35.770160",
+    "message_count": 2
+  },
+  "1aec08bb-0f7f-4993-9860-7242513baafd": {
+    "id": "1aec08bb-0f7f-4993-9860-7242513baafd",
+    "agent_name": "TA1900",
+    "title": "Explain SP\u2011MAG\u202fII welding mode and Integrated inve...",
+    "created_at": "2025-07-29T13:20:52.069589",
+    "updated_at": "2025-07-29T13:20:57.493857",
+    "message_count": 2
+  },
+  "b6be5a7f-a2aa-44b5-921a-553030ecf8f4": {
+    "id": "b6be5a7f-a2aa-44b5-921a-553030ecf8f4",
+    "agent_name": "UR10e",
+    "title": "Show me where to download the TA/TB series robot m...",
+    "created_at": "2025-07-29T13:21:12.973712",
+    "updated_at": "2025-07-29T13:21:16.494188",
+    "message_count": 2
+  },
+  "910a428c-84b9-4b2d-928a-f5ce90c169aa": {
+    "id": "910a428c-84b9-4b2d-928a-f5ce90c169aa",
+    "agent_name": "UR10e",
+    "title": "Display a link to the Universal Robots FAQ about U...",
+    "created_at": "2025-07-29T13:21:56.265241",
+    "updated_at": "2025-07-29T13:22:01.013737",
+    "message_count": 2
+  },
+  "47f06717-068b-4173-a5b0-99a507122d3d": {
+    "id": "47f06717-068b-4173-a5b0-99a507122d3d",
+    "agent_name": "UR10e",
+    "title": "Which safety certifications and IEC stop categorie...",
+    "created_at": "2025-07-29T13:22:23.704884",
+    "updated_at": "2025-07-29T13:22:28.214891",
+    "message_count": 2
+  },
+  "842151bf-e3a4-4f13-a837-07955f8b922b": {
+    "id": "842151bf-e3a4-4f13-a837-07955f8b922b",
+    "agent_name": "UR10e",
+    "title": "What is the maximum payload and reach of the UR10e...",
+    "created_at": "2025-07-29T13:26:57.827882",
+    "updated_at": "2025-07-29T13:27:02.682666",
+    "message_count": 2
+  },
+  "e8b80853-7147-482f-a70c-ccbc3be533ea": {
+    "id": "e8b80853-7147-482f-a70c-ccbc3be533ea",
+    "agent_name": "UR10e",
+    "title": "Explain how to set up emergency stop and enabling ...",
+    "created_at": "2025-07-29T13:27:14.450896",
+    "updated_at": "2025-07-29T13:27:19.325381",
+    "message_count": 2
+  },
+  "b5b8c4dd-85b0-41ae-b464-cee8078c810a": {
+    "id": "b5b8c4dd-85b0-41ae-b464-cee8078c810a",
+    "agent_name": "UR10e",
+    "title": "Can you link me to the latest UR10e e\u2011Series user ...",
+    "created_at": "2025-07-29T13:27:30.641437",
+    "updated_at": "2025-07-29T13:27:34.247758",
+    "message_count": 2
+  },
+  "ec544d3e-b344-4f9c-8bfa-c8263bcf05fb": {
+    "id": "ec544d3e-b344-4f9c-8bfa-c8263bcf05fb",
+    "agent_name": "UR10e",
+    "title": "What is the maximum payload and reach of the UR10e...",
+    "created_at": "2025-07-29T14:16:40.013730",
+    "updated_at": "2025-07-29T14:16:45.118615",
+    "message_count": 2
+  },
+  "89c3d546-a688-48c9-ba21-c0382a198aac": {
+    "id": "89c3d546-a688-48c9-ba21-c0382a198aac",
+    "agent_name": "UR10e",
+    "title": "Explain how to set up emergency stop and enabling ...",
+    "created_at": "2025-07-29T14:16:58.935762",
+    "updated_at": "2025-07-29T14:17:05.440630",
+    "message_count": 2
+  },
+  "8074bb25-3389-4155-98d5-f0877cb1db58": {
+    "id": "8074bb25-3389-4155-98d5-f0877cb1db58",
+    "agent_name": "UR10e",
+    "title": "Can you link me to the latest UR10e e\u2011Series user ...",
+    "created_at": "2025-07-29T14:17:18.187656",
+    "updated_at": "2025-07-29T14:17:22.298225",
+    "message_count": 2
+  },
+  "a173f38d-4f41-4e3c-a5d4-c5ddb64f5125": {
+    "id": "a173f38d-4f41-4e3c-a5d4-c5ddb64f5125",
+    "agent_name": "TA1900",
+    "title": "Explain SP\u2011MAG\u202fII welding mode and Integrated inve...",
+    "created_at": "2025-07-29T14:17:46.976472",
+    "updated_at": "2025-07-29T14:17:52.092413",
+    "message_count": 2
+  },
+  "dd38eb21-15f3-4cee-a752-2b102bdee42d": {
+    "id": "dd38eb21-15f3-4cee-a752-2b102bdee42d",
+    "agent_name": "UR10e",
+    "title": "hey",
+    "created_at": "2025-07-29T15:14:00.084085",
+    "updated_at": "2025-07-29T15:14:04.310395",
+    "message_count": 2
+  },
+  "fbe9eef4-aaf3-4721-bbd8-191adaff5fe0": {
+    "id": "fbe9eef4-aaf3-4721-bbd8-191adaff5fe0",
+    "agent_name": "UR10e",
+    "title": "hey",
+    "created_at": "2025-07-29T15:16:47.687214",
+    "updated_at": "2025-07-29T15:16:50.745373",
+    "message_count": 2
+  },
+  "8b638da5-b93e-40a8-aafb-d8726060b744": {
+    "id": "8b638da5-b93e-40a8-aafb-d8726060b744",
+    "agent_name": "Boiler",
+    "title": "hey",
+    "created_at": "2025-07-29T15:18:03.860245",
+    "updated_at": "2025-07-29T15:18:07.810706",
+    "message_count": 2
+  },
+  "b3751344-6a72-4239-a931-5b1979300cf3": {
+    "id": "b3751344-6a72-4239-a931-5b1979300cf3",
+    "agent_name": "Boiler",
+    "title": "hey",
+    "created_at": "2025-07-29T15:19:41.395535",
+    "updated_at": "2025-07-29T15:19:44.272290",
+    "message_count": 2
+  },
+  "9ad9e5fb-2f97-4d63-9067-824594489e1d": {
+    "id": "9ad9e5fb-2f97-4d63-9067-824594489e1d",
+    "agent_name": "Boiler",
+    "title": "hey",
+    "created_at": "2025-07-29T15:21:12.071367",
+    "updated_at": "2025-07-29T15:21:14.947546",
+    "message_count": 2
+  },
+  "5f935ca3-8935-417d-a4bd-6bd592d5078a": {
+    "id": "5f935ca3-8935-417d-a4bd-6bd592d5078a",
+    "agent_name": "Boiler",
+    "title": "hey",
+    "created_at": "2025-07-29T15:23:20.405235",
+    "updated_at": "2025-07-29T15:52:07.828688",
+    "message_count": 4
+  },
+  "f53de026-30d7-464f-9589-03be55c5745e": {
+    "id": "f53de026-30d7-464f-9589-03be55c5745e",
+    "agent_name": "UR10e",
+    "title": "hey",
+    "created_at": "2025-07-29T15:38:24.014468",
+    "updated_at": "2025-07-29T15:38:27.621348",
+    "message_count": 2
+  },
+  "f527a0c9-9522-4cd0-83dc-c6634e4eccdf": {
+    "id": "f527a0c9-9522-4cd0-83dc-c6634e4eccdf",
+    "agent_name": "UR10e",
+    "title": "hey",
+    "created_at": "2025-07-29T16:13:15.480452",
+    "updated_at": "2025-07-29T16:13:19.078526",
+    "message_count": 2
+  },
+  "1506d633-0f72-4a66-a6d6-149f92bd251e": {
+    "id": "1506d633-0f72-4a66-a6d6-149f92bd251e",
+    "agent_name": "Test",
+    "title": "whats algomaster",
+    "created_at": "2025-07-29T16:21:06.107792",
+    "updated_at": "2025-07-29T16:21:10.731793",
+    "message_count": 2
+  },
+  "d9073bd5-d86e-46d9-82b5-ed198d427d4a": {
+    "id": "d9073bd5-d86e-46d9-82b5-ed198d427d4a",
+    "agent_name": "test",
+    "title": "hey",
+    "created_at": "2025-07-30T10:03:25.390347",
+    "updated_at": "2025-07-30T10:03:29.549568",
+    "message_count": 2
+  },
+  "bacc68c8-0461-4116-8327-e09012286fd5": {
+    "id": "bacc68c8-0461-4116-8327-e09012286fd5",
+    "agent_name": "test",
+    "title": "hey",
+    "created_at": "2025-07-30T10:05:49.161097",
+    "updated_at": "2025-07-30T10:05:52.315466",
+    "message_count": 2
+  },
+  "76de4713-5f9a-4c66-886a-de44f45715d4": {
+    "id": "76de4713-5f9a-4c66-886a-de44f45715d4",
+    "agent_name": "UR10e",
+    "title": "how do I turn it on",
+    "created_at": "2025-07-30T10:06:12.596919",
+    "updated_at": "2025-07-30T10:06:17.134302",
+    "message_count": 2
+  },
+  "424b9f47-29a0-4197-bdf5-ba6571131a7d": {
+    "id": "424b9f47-29a0-4197-bdf5-ba6571131a7d",
+    "agent_name": "UR10e",
+    "title": "help me troubleshoot it",
+    "created_at": "2025-07-30T10:06:29.745315",
+    "updated_at": "2025-07-30T10:06:33.274992",
+    "message_count": 2
+  },
+  "ec122df3-9556-47da-b9a5-202ec45a2880": {
+    "id": "ec122df3-9556-47da-b9a5-202ec45a2880",
+    "agent_name": "UR10e",
+    "title": "showing error",
+    "created_at": "2025-07-30T10:06:47.795241",
+    "updated_at": "2025-07-30T10:06:51.318603",
+    "message_count": 2
+  },
+  "b1aed755-1cce-4daa-a98f-3b06055baed9": {
+    "id": "b1aed755-1cce-4daa-a98f-3b06055baed9",
+    "agent_name": "UR10e",
+    "title": "hey",
+    "created_at": "2025-07-30T10:14:47.521234",
+    "updated_at": "2025-07-30T10:14:52.057740",
+    "message_count": 2
+  },
+  "c4668f7a-8034-4cf3-91b8-9b9a4de187d1": {
+    "id": "c4668f7a-8034-4cf3-91b8-9b9a4de187d1",
+    "agent_name": "UR10e",
+    "title": "error",
+    "created_at": "2025-07-30T10:15:12.736581",
+    "updated_at": "2025-07-30T10:15:16.739652",
+    "message_count": 2
+  },
+  "d25b6644-0f66-4985-8752-e1d0ae1b80f9": {
+    "id": "d25b6644-0f66-4985-8752-e1d0ae1b80f9",
+    "agent_name": "UR10e",
+    "title": "help me start it after error trouble shooting",
+    "created_at": "2025-07-30T10:15:55.922611",
+    "updated_at": "2025-07-30T10:16:11.843766",
+    "message_count": 2
+  },
+  "2945e66b-662d-4ecd-957b-7ace390a4dc1": {
+    "id": "2945e66b-662d-4ecd-957b-7ace390a4dc1",
+    "agent_name": "UR10e",
+    "title": "hey",
+    "created_at": "2025-07-30T10:17:00.838617",
+    "updated_at": "2025-07-30T10:17:04.428075",
+    "message_count": 2
+  },
+  "605ea4d6-b869-4184-ac61-e0a9aaa321bb": {
+    "id": "605ea4d6-b869-4184-ac61-e0a9aaa321bb",
+    "agent_name": "UR10e",
+    "title": "hey",
+    "created_at": "2025-07-30T10:20:15.272789",
+    "updated_at": "2025-07-30T10:20:18.351734",
+    "message_count": 2
+  },
+  "837ae99e-89f6-4c8d-aa05-047afa05f681": {
+    "id": "837ae99e-89f6-4c8d-aa05-047afa05f681",
+    "agent_name": "UR10e",
+    "title": "start up guide",
+    "created_at": "2025-07-30T10:20:26.171226",
+    "updated_at": "2025-07-30T10:20:32.055934",
+    "message_count": 2
+  },
+  "d11ed110-f79c-4032-bf71-76edd2996e6f": {
+    "id": "d11ed110-f79c-4032-bf71-76edd2996e6f",
+    "agent_name": "UR10e",
+    "title": "what did I tell you so far",
+    "created_at": "2025-07-30T10:21:09.250143",
+    "updated_at": "2025-07-30T10:21:14.770528",
+    "message_count": 2
+  },
+  "3d191fb4-edb4-430d-b145-32f401ca7838": {
+    "id": "3d191fb4-edb4-430d-b145-32f401ca7838",
+    "agent_name": "UR10e",
+    "title": "give start up guide",
+    "created_at": "2025-07-30T10:24:53.443528",
+    "updated_at": "2025-07-30T10:25:00.577553",
+    "message_count": 2
+  },
+  "4fde73d7-1dc9-43ed-9ffa-9cc5c9a1b03d": {
+    "id": "4fde73d7-1dc9-43ed-9ffa-9cc5c9a1b03d",
+    "agent_name": "UR10e",
+    "title": "hey",
+    "created_at": "2025-08-02T20:27:00.027817",
+    "updated_at": "2025-08-02T20:27:04.044005",
+    "message_count": 2
   }
 }

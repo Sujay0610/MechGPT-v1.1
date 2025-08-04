@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
 import { useChat } from './context/ChatContext'
+import { useAuth } from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
+import MainLayout from './components/MainLayout'
 
 interface Message {
   id: string
@@ -25,17 +28,23 @@ interface Agent {
   id: string
   name: string
   description: string
+  extra_instructions: string
   created_at: string
   updated_at: string
 }
 
 interface AgentStats {
+  agent_name: string
   total_chunks: number
   total_files: number
-  last_updated: string
+  files: string[]
+  created_at: string
+  updated_at: string
+  description: string
+  extra_instructions: string
 }
 
-export default function ChatPage() {
+function ChatPage() {
   const {
     messages,
     conversations,
@@ -46,9 +55,18 @@ export default function ChatPage() {
     loadAgentConversations,
     createNewConversation,
     deleteConversation,
+    setCurrentConversationId,
     isLoading,
     setIsLoading
   } = useChat()
+  
+  const { user } = useAuth()
+  
+  // Helper function to get auth headers
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem('auth_token')
+    return token ? { Authorization: `Bearer ${token}` } : {}
+  }
   
   const [agents, setAgents] = useState<Agent[]>([])
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
@@ -58,10 +76,15 @@ export default function ChatPage() {
   const [showCreateForm, setShowCreateForm] = useState(false)
   const [newAgentName, setNewAgentName] = useState('')
   const [newAgentDescription, setNewAgentDescription] = useState('')
+  const [newAgentInstructions, setNewAgentInstructions] = useState('')
   const [creating, setCreating] = useState(false)
   const [showUploadForm, setShowUploadForm] = useState(false)
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const [uploading, setUploading] = useState(false)
+  const [uploadMode, setUploadMode] = useState<'files' | 'text' | 'links'>('files')
+  const [textContent, setTextContent] = useState('')
+  const [textTitle, setTextTitle] = useState('')
+  const [linkUrls, setLinkUrls] = useState('')
   const [showConversations, setShowConversations] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [agentToDelete, setAgentToDelete] = useState<Agent | null>(null)
@@ -82,16 +105,29 @@ export default function ChatPage() {
 
   const fetchAgents = async () => {
     try {
-      const response = await axios.get('/api/agents')
+      const response = await axios.get('/api/agents', {
+        headers: getAuthHeaders()
+      })
       setAgents(response.data)
       
       // Fetch stats for each agent
       const statsPromises = response.data.map(async (agent: Agent) => {
         try {
-          const statsResponse = await axios.get(`/api/agents/${agent.name}/stats`)
+          const statsResponse = await axios.get(`/api/agents/${agent.name}/stats`, {
+            headers: getAuthHeaders()
+          })
           return { [agent.name]: statsResponse.data }
         } catch (error) {
-          return { [agent.name]: { total_chunks: 0, total_files: 0, last_updated: 'Never' } }
+          return { [agent.name]: { 
+            agent_name: agent.name,
+            total_chunks: 0, 
+            total_files: 0, 
+            files: [],
+            created_at: '',
+            updated_at: '',
+            description: '',
+            extra_instructions: ''
+          } }
         }
       })
       
@@ -118,11 +154,15 @@ export default function ChatPage() {
     try {
       await axios.post('/api/agents', {
         name: newAgentName.trim(),
-        description: newAgentDescription.trim() || 'No description provided'
+        description: newAgentDescription.trim() || 'No description provided',
+        extra_instructions: newAgentInstructions.trim() || ''
+      }, {
+        headers: getAuthHeaders()
       })
       
       setNewAgentName('')
       setNewAgentDescription('')
+      setNewAgentInstructions('')
       setShowCreateForm(false)
       await fetchAgents()
     } catch (error: any) {
@@ -144,7 +184,9 @@ export default function ChatPage() {
 
     setDeleting(true)
     try {
-      await axios.delete(`/api/agents/${agentToDelete.name}`)
+      await axios.delete(`/api/agents/${agentToDelete.name}`, {
+        headers: getAuthHeaders()
+      })
       
       // If the deleted agent was selected, clear selection
       if (selectedAgent?.id === agentToDelete.id) {
@@ -169,9 +211,16 @@ export default function ChatPage() {
   }
 
   const selectAgent = async (agent: Agent) => {
+    // Prevent agent selection during upload
+    if (uploadingAgent) {
+      alert('Please wait for the current upload to complete before selecting a different agent.')
+      return
+    }
+    
     setSelectedAgent(agent)
     clearMessages() // Clear messages when switching agents
-    await loadAgentConversations(agent.name) // Load conversations for this agent
+    setCurrentConversationId(null) // Always start with new chat
+    setShowConversations(false) // Always start in chat mode, not history
   }
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,6 +242,8 @@ export default function ChatPage() {
 
   const [uploadProgress, setUploadProgress] = useState('')
   const [uploadResult, setUploadResult] = useState('')
+  const [showUploadStatus, setShowUploadStatus] = useState(false)
+  const [uploadingAgent, setUploadingAgent] = useState<string | null>(null)
 
   const pollJobStatus = async (jobId: string, agentName: string) => {
     const maxAttempts = 120 // 10 minutes with 5-second intervals
@@ -200,7 +251,9 @@ export default function ChatPage() {
     
     const poll = async (): Promise<void> => {
       try {
-        const response = await axios.get(`/api/agents/${agentName}/upload/status/${jobId}`)
+        const response = await axios.get(`/api/agents/${agentName}/upload/status/${jobId}`, {
+          headers: getAuthHeaders()
+        })
         const status = response.data
         
         // Update progress
@@ -213,12 +266,15 @@ export default function ChatPage() {
           setShowUploadForm(false)
           await fetchAgents() // Refresh agents
           setUploading(false)
+          setUploadingAgent(null)
+          setShowUploadStatus(false)
           return
         }
         
         if (status.status === 'failed') {
           setUploadResult(`Processing failed: ${status.message}`)
           setUploading(false)
+          setUploadingAgent(null)
           return
         }
         
@@ -229,12 +285,14 @@ export default function ChatPage() {
         } else if (attempts >= maxAttempts) {
           setUploadResult('Status check timed out. Files may still be processing.')
           setUploading(false)
+          setUploadingAgent(null)
         }
         
       } catch (error: any) {
         console.error('Status polling error:', error)
         setUploadResult(`Status check failed: ${error.message}`)
         setUploading(false)
+        setUploadingAgent(null)
       }
     }
     
@@ -245,8 +303,13 @@ export default function ChatPage() {
     if (!selectedAgent || selectedFiles.length === 0) return
 
     setUploading(true)
+    setUploadingAgent(selectedAgent.name)
     setUploadProgress('Starting upload...')
     setUploadResult('')
+    setShowUploadStatus(true)
+    
+    // Minimize the upload dialog
+    setShowUploadForm(false)
     
     try {
       const formData = new FormData()
@@ -258,7 +321,8 @@ export default function ChatPage() {
       
       const response = await axios.post(`/api/agents/${selectedAgent.name}/upload`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          ...getAuthHeaders()
         }
       })
       
@@ -273,6 +337,8 @@ export default function ChatPage() {
         setSelectedFiles([])
         await fetchAgents()
         setUploading(false)
+        setUploadingAgent(null)
+        setShowUploadStatus(false)
       }
       
     } catch (error: any) {
@@ -288,7 +354,100 @@ export default function ChatPage() {
       
       setUploadResult(errorMessage)
       setUploading(false)
+      setUploadingAgent(null)
       setUploadProgress('')
+    }
+  }
+
+  const uploadText = async () => {
+    if (!selectedAgent || !textContent.trim()) return
+
+    setUploading(true)
+    setUploadProgress('Processing text content...')
+    setUploadResult('')
+    
+    try {
+      const response = await axios.post(`/api/agents/${selectedAgent.name}/text`, {
+        content: textContent.trim(),
+        title: textTitle.trim() || 'Text Content'
+      }, {
+        headers: getAuthHeaders()
+      })
+      
+      const result = response.data
+      setUploadResult(result.message || 'Text content processed successfully!')
+      setTextContent('')
+      setTextTitle('')
+      await fetchAgents()
+      setUploading(false)
+      
+    } catch (error: any) {
+      console.error('Text upload error:', error)
+      
+      let errorMessage = 'Failed to process text content'
+      
+      if (error.response?.data?.detail) {
+        errorMessage = error.response.data.detail
+      } else if (error.message) {
+        errorMessage = `Text processing failed: ${error.message}`
+      }
+      
+      setUploadResult(errorMessage)
+      setUploading(false)
+      setUploadProgress('')
+    }
+  }
+
+  const uploadLinks = async () => {
+    if (!selectedAgent || !linkUrls.trim()) return
+
+    setUploading(true)
+    setUploadProgress('Crawling and processing links...')
+    setUploadResult('')
+    
+    try {
+      const urls = linkUrls.split('\n').map(url => url.trim()).filter(url => url)
+      
+      const response = await axios.post(`/api/agents/${selectedAgent.name}/crawl`, {
+        urls: urls
+      }, {
+        headers: getAuthHeaders()
+      })
+      
+      const result = response.data
+      setUploadResult(result.message || 'Links crawled and processed successfully!')
+      setLinkUrls('')
+      await fetchAgents()
+      setUploading(false)
+      
+    } catch (error: any) {
+      console.error('Link crawl error:', error)
+      
+      let errorMessage = 'Failed to crawl and process links'
+      
+      if (error.response?.data?.detail) {
+        errorMessage = error.response.data.detail
+      } else if (error.message) {
+        errorMessage = `Link crawling failed: ${error.message}`
+      }
+      
+      setUploadResult(errorMessage)
+      setUploading(false)
+      setUploadProgress('')
+    }
+  }
+
+  const handleUpload = () => {
+    switch (uploadMode) {
+      case 'files':
+        uploadFiles()
+        break
+      case 'text':
+        uploadText()
+        break
+      case 'links':
+        uploadLinks()
+        break
     }
   }
 
@@ -314,12 +473,15 @@ export default function ChatPage() {
         requestBody.conversation_id = currentConversationId
       }
       
-      const response = await axios.post(`/api/agents/${selectedAgent.name}/chat`, requestBody)
+      const response = await axios.post(`/api/agents/${selectedAgent.name}/chat`, requestBody, {
+        headers: getAuthHeaders()
+      })
       
       addMessage(response.data.response, 'bot')
       
-      // If this was a new conversation, load the updated conversations list
+      // If this was a new conversation, set the conversation ID and load the updated conversations list
       if (!currentConversationId && response.data.conversation_id) {
+        setCurrentConversationId(response.data.conversation_id)
         await loadAgentConversations(selectedAgent.name)
       }
     } catch (error: any) {
@@ -334,6 +496,35 @@ export default function ChatPage() {
 
   return (
     <div className="page-container flex h-[calc(100vh-8rem)] max-w-7xl mx-auto">
+      {/* Upload Status Indicator */}
+      {showUploadStatus && uploadingAgent && (
+        <div className="fixed top-20 right-4 z-40 w-80 bg-white border border-blue-200 rounded-lg shadow-lg">
+          <div className="p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-blue-900">Upload Progress</h3>
+              <div className="flex items-center space-x-2">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                <span className="text-xs text-blue-600">{uploadingAgent}</span>
+              </div>
+            </div>
+            {uploadProgress && (
+              <div className="text-xs text-gray-600 whitespace-pre-line bg-gray-50 p-2 rounded border max-h-32 overflow-y-auto">
+                {uploadProgress}
+              </div>
+            )}
+            {uploadResult && (
+              <div className={`text-xs mt-2 p-2 rounded border ${
+                uploadResult.includes('failed') || uploadResult.includes('error') 
+                  ? 'bg-red-50 border-red-200 text-red-800' 
+                  : 'bg-green-50 border-green-200 text-green-800'
+              }`}>
+                {uploadResult}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+      
       {/* Sidebar - Agents List */}
       <div className="w-72 bg-white border-r border-gray-200 flex flex-col shadow-lg">
         {/* Sidebar Header */}
@@ -443,8 +634,12 @@ export default function ChatPage() {
                   return (
                     <div
                       key={agent.id}
-                      className={`sidebar-item p-3 rounded-lg mb-2 cursor-pointer transition-colors ${
-                        isSelected ? 'bg-blue-50 border border-blue-200' : 'hover:bg-gray-50'
+                      className={`sidebar-item p-3 rounded-lg mb-2 transition-colors ${
+                        uploadingAgent && uploadingAgent !== agent.name 
+                          ? 'opacity-50 cursor-not-allowed bg-gray-100' 
+                          : isSelected 
+                            ? 'bg-blue-50 border border-blue-200 cursor-pointer' 
+                            : 'hover:bg-gray-50 cursor-pointer'
                       }`}
                       onClick={() => selectAgent(agent)}
                     >
@@ -497,13 +692,50 @@ export default function ChatPage() {
                   </div>
                   <button
                     onClick={() => setShowUploadForm(true)}
-                    className="animated-button bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-3 py-1.5 rounded-lg text-sm"
+                    disabled={uploadingAgent && uploadingAgent !== selectedAgent.name}
+                    className={`animated-button px-3 py-1.5 rounded-lg text-sm ${
+                      uploadingAgent && uploadingAgent !== selectedAgent.name
+                        ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-50'
+                        : 'bg-white bg-opacity-20 hover:bg-opacity-30 text-white'
+                    }`}
                   >
                     📁 Upload
                   </button>
                   <button
-                    onClick={() => setShowConversations(!showConversations)}
-                    className="animated-button bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-3 py-1.5 rounded-lg text-sm"
+                    onClick={() => {
+                      // Start a new conversation
+                      clearMessages()
+                      setCurrentConversationId(null)
+                      setShowConversations(false)
+                    }}
+                    disabled={uploadingAgent && uploadingAgent !== selectedAgent.name}
+                    className={`animated-button px-3 py-1.5 rounded-lg text-sm ${
+                      uploadingAgent && uploadingAgent !== selectedAgent.name
+                        ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-50'
+                        : 'bg-white bg-opacity-20 hover:bg-opacity-30 text-white'
+                    }`}
+                  >
+                    💬 New Chat
+                  </button>
+                  <button
+                    onClick={async () => {
+                      if (!showConversations && selectedAgent) {
+                        // Load conversations immediately when showing history
+                        await loadAgentConversations(selectedAgent.name)
+                      } else if (showConversations) {
+                        // When going back from history to chat, clear current conversation
+                        // to start fresh chat mode
+                        setCurrentConversationId(null)
+                        clearMessages()
+                      }
+                      setShowConversations(!showConversations)
+                    }}
+                    disabled={uploadingAgent && uploadingAgent !== selectedAgent.name}
+                    className={`animated-button px-3 py-1.5 rounded-lg text-sm ${
+                      uploadingAgent && uploadingAgent !== selectedAgent.name
+                        ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-50'
+                        : 'bg-white bg-opacity-20 hover:bg-opacity-30 text-white'
+                    }`}
                   >
                     {showConversations ? '← Back' : '📜 History'}
                   </button>
@@ -608,13 +840,15 @@ export default function ChatPage() {
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder={`💬 Ask ${selectedAgent.name} anything...`}
+                    placeholder={uploadingAgent && uploadingAgent !== selectedAgent.name 
+                      ? `Upload in progress for ${uploadingAgent}. Please wait...` 
+                      : `💬 Ask ${selectedAgent.name} anything...`}
                     className="animated-input w-full border border-gray-300 rounded-full px-5 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all duration-200 hover:shadow-md bg-white"
-                    disabled={isLoading}
+                    disabled={isLoading || (uploadingAgent && uploadingAgent !== selectedAgent.name)}
                   />
                   <button
                     type="submit"
-                    disabled={!input.trim() || isLoading}
+                    disabled={!input.trim() || isLoading || (uploadingAgent && uploadingAgent !== selectedAgent.name)}
                     className="animated-button absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-blue-600 text-white w-8 h-8 rounded-full hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg flex items-center justify-center"
                   >
                     {isLoading ? (
@@ -672,7 +906,7 @@ export default function ChatPage() {
                   required
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Description
                 </label>
@@ -682,6 +916,18 @@ export default function ChatPage() {
                   className="animated-input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter agent description"
                   rows={3}
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Extra Instructions
+                </label>
+                <textarea
+                  value={newAgentInstructions}
+                  onChange={(e) => setNewAgentInstructions(e.target.value)}
+                  className="animated-input w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter custom instructions for this agent (optional)"
+                  rows={4}
                 />
               </div>
               <div className="flex justify-end space-x-3">
@@ -710,50 +956,127 @@ export default function ChatPage() {
       {showUploadForm && (
           <div className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="modal-content bg-white rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto">
-            <h2 className="text-xl font-bold mb-4">Upload Files to {selectedAgent?.name || 'Agent'}</h2>
+            <h2 className="text-xl font-bold mb-4">Upload Content to {selectedAgent?.name || 'Agent'}</h2>
             
-            {/* File Drop Zone */}
-            <div
-              onDrop={handleFileDrop}
-              onDragOver={handleDragOver}
-              className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-4 hover:border-blue-400 transition-colors"
-            >
-              <div className="text-gray-400 text-4xl mb-4">📄</div>
-              <p className="text-gray-600 mb-2">Drag and drop PDF files here, or</p>
-              <label className="animated-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 cursor-pointer inline-block">
-                Choose Files
-                <input
-                  type="file"
-                  multiple
-                  accept=".pdf"
-                  onChange={handleFileSelect}
-                  className="hidden"
-                />
-              </label>
-              <p className="text-sm text-gray-500 mt-2">Only PDF files are supported</p>
+            {/* Upload Mode Tabs */}
+            <div className="flex border-b mb-4">
+              <button
+                onClick={() => setUploadMode('files')}
+                className={`px-4 py-2 font-medium ${uploadMode === 'files' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+              >
+                Files
+              </button>
+              <button
+                onClick={() => setUploadMode('text')}
+                className={`px-4 py-2 font-medium ${uploadMode === 'text' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+              >
+                Text/Markdown
+              </button>
+              <button
+                onClick={() => setUploadMode('links')}
+                className={`px-4 py-2 font-medium ${uploadMode === 'links' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+              >
+                Links
+              </button>
             </div>
 
-            {/* Selected Files List */}
-            {selectedFiles.length > 0 && (
-              <div className="mb-4">
-                <h3 className="font-medium mb-2">Selected Files ({selectedFiles.length})</h3>
-                <div className="space-y-2 max-h-40 overflow-y-auto">
-                  {selectedFiles.map((file, index) => (
-                    <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-red-500">📄</span>
-                        <span className="text-sm">{file.name}</span>
-                        <span className="text-xs text-gray-500">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
-                      </div>
-                      <button
-                        onClick={() => removeFile(index)}
-                        className="text-red-500 hover:text-red-700 text-sm"
-                        disabled={uploading}
-                      >
-                        ✕
-                      </button>
+            {/* Files Upload */}
+            {uploadMode === 'files' && (
+              <>
+                {/* File Drop Zone */}
+                <div
+                  onDrop={handleFileDrop}
+                  onDragOver={handleDragOver}
+                  className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-4 hover:border-blue-400 transition-colors"
+                >
+                  <div className="text-gray-400 text-4xl mb-4">📄</div>
+                  <p className="text-gray-600 mb-2">Drag and drop PDF files here, or</p>
+                  <label className="animated-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 cursor-pointer inline-block">
+                    Choose Files
+                    <input
+                      type="file"
+                      multiple
+                      accept=".pdf"
+                      onChange={handleFileSelect}
+                      className="hidden"
+                    />
+                  </label>
+                  <p className="text-sm text-gray-500 mt-2">Only PDF files are supported</p>
+                </div>
+
+                {/* Selected Files List */}
+                {selectedFiles.length > 0 && (
+                  <div className="mb-4">
+                    <h3 className="font-medium mb-2">Selected Files ({selectedFiles.length})</h3>
+                    <div className="space-y-2 max-h-40 overflow-y-auto">
+                      {selectedFiles.map((file, index) => (
+                        <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-red-500">📄</span>
+                            <span className="text-sm">{file.name}</span>
+                            <span className="text-xs text-gray-500">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                          </div>
+                          <button
+                            onClick={() => removeFile(index)}
+                            className="text-red-500 hover:text-red-700 text-sm"
+                            disabled={uploading}
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+                )}
+              </>
+            )}
+
+            {/* Text/Markdown Upload */}
+            {uploadMode === 'text' && (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Title (optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={textTitle}
+                    onChange={(e) => setTextTitle(e.target.value)}
+                    placeholder="Enter a title for this content"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Content *
+                  </label>
+                  <textarea
+                    value={textContent}
+                    onChange={(e) => setTextContent(e.target.value)}
+                    placeholder="Enter your text or markdown content here..."
+                    rows={12}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-vertical"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">Supports plain text and Markdown formatting</p>
+                </div>
+              </div>
+            )}
+
+            {/* Links Upload */}
+            {uploadMode === 'links' && (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    URLs to Crawl *
+                  </label>
+                  <textarea
+                    value={linkUrls}
+                    onChange={(e) => setLinkUrls(e.target.value)}
+                    placeholder="Enter URLs, one per line:\nhttps://example.com/page1\nhttps://example.com/page2"
+                    rows={8}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-vertical"
+                  />
+                  <p className="text-sm text-gray-500 mt-1">Enter one URL per line. The content will be crawled and processed automatically.</p>
                 </div>
               </div>
             )}
@@ -764,14 +1087,18 @@ export default function ChatPage() {
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex items-center space-x-2 mb-2">
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-                    <span className="text-sm font-medium text-blue-800">Processing {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''}...</span>
+                    <span className="text-sm font-medium text-blue-800">
+                      {uploadMode === 'files' && `Processing ${selectedFiles.length} file${selectedFiles.length !== 1 ? 's' : ''}...`}
+                      {uploadMode === 'text' && 'Processing text content...'}
+                      {uploadMode === 'links' && 'Crawling and processing links...'}
+                    </span>
                   </div>
                   {uploadProgress && (
                     <div className="text-xs text-blue-600 whitespace-pre-line">
                       {uploadProgress}
                     </div>
                   )}
-                  {!uploadProgress && (
+                  {!uploadProgress && uploadMode === 'files' && (
                     <div className="text-xs text-blue-600">
                       <div>• Uploading files to server</div>
                       <div>• Parsing PDFs with LlamaParse</div>
@@ -804,6 +1131,12 @@ export default function ChatPage() {
                 onClick={() => {
                   setShowUploadForm(false)
                   setSelectedFiles([])
+                  setTextContent('')
+                  setTextTitle('')
+                  setLinkUrls('')
+                  setUploadResult('')
+                  setUploadProgress('')
+                  setUploadMode('files')
                 }}
                 className="px-4 py-2 text-gray-600 hover:text-gray-800"
                 disabled={uploading}
@@ -811,11 +1144,17 @@ export default function ChatPage() {
                 Cancel
               </button>
               <button
-                onClick={uploadFiles}
-                disabled={selectedFiles.length === 0 || uploading}
+                onClick={handleUpload}
+                disabled={(
+                  (uploadMode === 'files' && selectedFiles.length === 0) ||
+                  (uploadMode === 'text' && !textContent.trim()) ||
+                  (uploadMode === 'links' && !linkUrls.trim())
+                ) || uploading}
                 className="animated-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {uploading ? 'Uploading...' : `Upload ${selectedFiles.length} File${selectedFiles.length !== 1 ? 's' : ''}`}
+                {uploadMode === 'files' && (uploading ? 'Uploading...' : `Upload ${selectedFiles.length} File${selectedFiles.length !== 1 ? 's' : ''}`)}
+                {uploadMode === 'text' && (uploading ? 'Processing...' : 'Process Text')}
+                {uploadMode === 'links' && (uploading ? 'Crawling...' : 'Crawl & Process Links')}
               </button>
             </div>
           </div>
@@ -856,5 +1195,15 @@ export default function ChatPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function ProtectedChatPage() {
+  return (
+    <ProtectedRoute>
+      <MainLayout>
+        <ChatPage />
+      </MainLayout>
+    </ProtectedRoute>
   )
 }

@@ -1,94 +1,4 @@
 {
-  "a1b0ba11-247b-4bbc-a2cf-1d7607710ae6": [
-    {
-      "id": "c0038e66-dffb-4e89-a793-96592502bbdb",
-      "text": "list some spare",
-      "sender": "user",
-      "timestamp": "2025-07-27T17:59:02.355283",
-      "agent_name": "New",
-      "conversation_id": "a1b0ba11-247b-4bbc-a2cf-1d7607710ae6"
-    },
-    {
-      "id": "fc68935b-7f91-481d-b1c2-fd051b9b2987",
-      "text": "Here\u2019s a list of **critical spare parts** from the provided technical documentation, along with their **part numbers** for easy identification and ordering:\n\n### **Fuel Line Spares**\n- **Fuel Pump Suntec - E6**: Part No. 8220050000  \n- **Oil Seal - E6**: Part No. 8220090100  \n- **\"O\" Ring E6**: Part No. 8220030300  \n- **Plunger Spring - E6**: Part No. 8220090200  \n- **Spring Seal - E6**: Part No. 8220090200  \n\n### **Water Line Spares**\n- **Booster Pump**: Part No. 8110124600  \n- **Transparent Water Filter**: Part No. PGSX 710010  \n- **Filter Element - 60 MESH**: Part No. PGSX 71001A  \n- **Glass - Transparent Filter**: Part No. PGSX 71001B  \n\n### **Burner Assembly Spares**\n- **Photocell CEM -8205**: Part No. 8603111400  \n- **Solenoid Coil**: Part No. PGRX 241314  \n- **Ignition Electrode**: Part No. 8625111300  \n- **Ignition Transformer 14.05 kv**: Part No. 8606111100  \n\n### **Steam Line Spares**\n- **Main Stop Valve -1**: Part No. 9711102500  \n- **Safety Valve -1**: Part No. 9722122500  \n- **Pr. Gauge 0.25 kg/cm2**: Part No. 8451141800  \n\n### **Boiler Assembly Spares**\n- **Sequence Controller**: Part No. 8605111600  \n- **RTD for Steam & Booster Pump I/L**: Part No. 8412120900  \n- **Limit Switch for Blowdown Valve**: Part No. 8612112200  \n\n### **Safety Warnings**\n- **Always isolate the boiler system** before replacing parts to prevent accidents.  \n- **Use proper PPE** (Personal Protective Equipment) such as gloves and safety glasses during maintenance.  \n- **Refer to the manufacturer\u2019s manual** for specific installation and safety procedures.  \n\nIf you need further details on installation or troubleshooting, consult the **boiler operation manual** or seek assistance from a certified technician.",
-      "sender": "bot",
-      "timestamp": "2025-07-27T17:59:20.853457",
-      "agent_name": "New",
-      "conversation_id": "a1b0ba11-247b-4bbc-a2cf-1d7607710ae6"
-    }
-  ],
-  "fd216de7-94eb-4337-a90b-dc1e5be74d85": [
-    {
-      "id": "1539d458-10e5-45f5-a8d7-c04fc16d51a2",
-      "text": "lsit some spares",
-      "sender": "user",
-      "timestamp": "2025-07-27T18:01:52.031154",
-      "agent_name": "New",
-      "conversation_id": "fd216de7-94eb-4337-a90b-dc1e5be74d85"
-    },
-    {
-      "id": "b1f3aaf2-7860-4379-96bf-732e91392bd1",
-      "text": "Here\u2019s a list of **essential boiler spares** based on the provided technical documentation. Ensure you have these parts on hand for maintenance and troubleshooting:\n\n### **Fuel Line Spares**\n- **Fuel Pump Motor** (0.37kw, 2p) - Part No: 8323300500  \n- **Fuel Pump Suntec - E6** - Part No: 8220050000  \n- **Oil Seal - E6** - Part No: 8220090100  \n- **\"O\" Ring E6** - Part No: 8220030300  \n- **Simplex Oil Filter** - Part No: PGRX710410  \n- **Filter Element - 120 MESH** - Part No: PGRX710420  \n\n### **Water Line Spares**\n- **Booster Pump** - Part No: 8110124600  \n- **Transparent Water Filter** - Part No: PGSX 710010  \n- **Filter Element - 60 MESH** - Part No: PGSX 71001A  \n- **Glass - Transparent Filter** - Part No: PGSX 71001B  \n\n### **Burner Assembly Spares**\n- **Photocell CEM -8205** - Part No: 8603111400  \n- **Ignition Electrode** - Part No: 8625111300  \n- **Ignition Transformer 14.05 kv** - Part No: 8606111100  \n- **Nozzle Danfoss 45B 6GPH for SX-600/FO** - Part No: 8904131000  \n\n### **Steam Line Spares**\n- **Main Stop Valve -1** - Part No: 9711102500  \n- **Safety Valve -1.1/2\"** - Part No: PGRX711400  \n- **Pr. Gauge 0.25 kg/cm\u00b2** - Part No: 8451141800  \n\n### **Water Pump Spares**\n- **Gasket Packing (HTC -13)** - Part No: 811012470A  \n- **Oil Seal (HCA-5)** - Part No: 811012470J  \n- **Ball Bearing (HCA-5)** - Part No: 81101247 ok  \n\n### **Boiler Assembly Spares**\n- **Coil SX 600** - Part No: 312146620  \n- **Refractory Assembly SX 600** - Part No: PGSX 230010  \n- **Economiser With Heat Optimiser SX 600** - Part No: PGSX 270012  \n\n**Safety Note:** Always verify part numbers and compatibility with your specific boiler model before ordering or replacing components. Refer to the manufacturer\u2019s guidelines for installation and maintenance procedures.",
-      "sender": "bot",
-      "timestamp": "2025-07-27T18:01:58.747546",
-      "agent_name": "New",
-      "conversation_id": "fd216de7-94eb-4337-a90b-dc1e5be74d85"
-    }
-  ],
-  "af64dc7c-48fa-4196-a5a6-6e977ac2e196": [
-    {
-      "id": "b4afd8e6-6a24-4f6e-a348-aaf799db2027",
-      "text": "talk about UR10e and give official UR links",
-      "sender": "user",
-      "timestamp": "2025-07-28T18:54:28.270810",
-      "agent_name": "UR10e",
-      "conversation_id": "af64dc7c-48fa-4196-a5a6-6e977ac2e196"
-    },
-    {
-      "id": "c02693e1-3883-4bde-b18a-96fcfc6d8911",
-      "text": "The UR10e is a versatile collaborative robot designed for various applications like assembly, packaging, and quality inspection. It has a payload capacity of 10 kg and a reach of 1300 mm, making it suitable for a wide range of tasks. If you're looking for more detailed information or specific resources, you can check out the official Universal Robots website [here](https://www.universal-robots.com/products/ur10e/).\n\nWould you like to know more about its features, programming, or installation? I'm here to help!",
-      "sender": "bot",
-      "timestamp": "2025-07-28T18:54:33.471002",
-      "agent_name": "UR10e",
-      "conversation_id": "af64dc7c-48fa-4196-a5a6-6e977ac2e196"
-    }
-  ],
-  "7f398e4d-8c5f-4881-a5a5-fa3634217b87": [
-    {
-      "id": "ae6ad865-af82-4f3f-81fb-234f4e1ac0b7",
-      "text": "talk about UR10e and give official UR links",
-      "sender": "user",
-      "timestamp": "2025-07-28T18:59:50.836757",
-      "agent_name": "UR10e",
-      "conversation_id": "7f398e4d-8c5f-4881-a5a5-fa3634217b87"
-    },
-    {
-      "id": "9e354c71-652e-4d7c-a441-74b98b4e3398",
-      "text": "The UR10e is a versatile collaborative robot designed for various applications, such as assembly, packaging, and quality inspection. It has a payload capacity of 10 kg and a reach of 1300 mm, making it suitable for a wide range of tasks. \n\nIf you're looking for more detailed information, here are some official links from Universal Robots that you might find helpful:\n\n- [UR10e - Universal Robots](https://www.universal-robots.com/products/ur10e/)\n- [Real-Time Data Exchange (RTDE) Guide - Universal Robots](https://www.universal-robots.com/articles/ur/interface-communication/real-time-data-exchange-rtde-guide/)\n- [User Manual - UR10e - Universal Robots](https://www.universal-robots.com/manuals/EN/PDF/SW5_19/user-manual-UR10e-PDF_online/711-039-00_UR10e_User_Manual_en_Global.pdf)\n\nLet me know if you need more specific information or have any questions!",
-      "sender": "bot",
-      "timestamp": "2025-07-28T19:00:03.121316",
-      "agent_name": "UR10e",
-      "conversation_id": "7f398e4d-8c5f-4881-a5a5-fa3634217b87"
-    }
-  ],
-  "7844afef-dd4f-4679-a8a4-d1c6516c5615": [
-    {
-      "id": "7a5a1005-3625-4a7a-a9fa-3d4ff588733c",
-      "text": "talk about UR10e and give official UR links",
-      "sender": "user",
-      "timestamp": "2025-07-28T19:10:57.435514",
-      "agent_name": "UR10e",
-      "conversation_id": "7844afef-dd4f-4679-a8a4-d1c6516c5615"
-    },
-    {
-      "id": "efe97287-a855-4eef-8a73-2954df1c8274",
-      "text": "The UR10e is a versatile collaborative robot designed for various applications like assembly, packaging, and quality inspection. It has a payload capacity of 10 kg and a reach of 1300 mm, making it suitable for a wide range of tasks. \n\nIf you're looking for more detailed information, you can check out the official links below:\n\n- [UR10e - Universal Robots](https://www.universal-robots.com/products/ur10e/)\n- [User Manual - UR10e - Universal Robots](https://www.universal-robots.com/manuals/EN/PDF/SW5_19/user-manual-UR10e-PDF_online/711-039-00_UR10e_User_Manual_en_Global.pdf)\n\nLet me know if you need more specific details or have any questions!",
-      "sender": "bot",
-      "timestamp": "2025-07-28T19:11:04.954929",
-      "agent_name": "UR10e",
-      "conversation_id": "7844afef-dd4f-4679-a8a4-d1c6516c5615"
-    }
-  ],
   "2a4394b8-ee9d-4651-a959-ed14fc887086": [
     {
       "id": "7e90d6c6-08c9-4709-9a85-4ae3096df8ff",
@@ -153,6 +63,932 @@
       "timestamp": "2025-07-28T19:34:20.125525",
       "agent_name": "UR10e",
       "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "7ae62aca-a12e-4153-a9b6-2fc4bb27a93a",
+      "text": "im having issues in power it on guide me",
+      "sender": "user",
+      "timestamp": "2025-07-28T20:31:14.601359",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "2f76fb1c-8ce0-4693-b837-aa06d77d8c07",
+      "text": "It sounds like you're having trouble powering on the robot arm. Let's go through a few steps to troubleshoot this:\n\n1. **Check Power Connections**: Ensure that the main power cable is securely plugged into the Control Box.\n2. **Verify Drive Power Indicator**: Look for the drive power indicator light. If it's not on, there may be an issue with the power supply.\n3. **Inspect Digital Outputs**: Make sure the drive power indicator is correctly connected to the Digital Outputs (DO4 and 0V) as per the schematic.\n\nIf the indicator light is off after checking these steps, it might be a good idea to double-check the power source or consult the manual for further troubleshooting. Would you like more detailed instructions on any of these steps?",
+      "sender": "bot",
+      "timestamp": "2025-07-28T20:31:19.392046",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "7056b10e-e17d-4548-b928-cffe4680bb26",
+      "text": "yes deatils on power connects what to connect where",
+      "sender": "user",
+      "timestamp": "2025-07-28T20:31:38.734796",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "fe5f4275-4aff-4253-b053-fec0b4c67130",
+      "text": "To connect the power for the robot, you'll want to follow these steps:\n\n- **Connect the mains cable** from the Control Box, which has a standard IEC plug, to a country-specific mains plug or cable.\n- **Plug the IEC C13 connector** from the power cord into the IEC C14 appliance inlet located at the bottom of the Control Box.\n- **Ensure safety** by placing the power plug outside the reach of the robot, allowing for safe power removal without exposing personnel to hazards.\n\nAdditionally, make sure to include:\n- A connection to ground\n- A main fuse\n- A residual current device\n- A lockable switch in the OFF position for easy lockout\n\nIf you need more detailed instructions or have specific questions about any of these steps, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T20:31:43.867142",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "17a46a8e-c184-48e6-9d67-29a682f2436a",
+      "text": "include links guide me again",
+      "sender": "user",
+      "timestamp": "2025-07-28T20:51:47.115598",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    },
+    {
+      "id": "a1b7c021-5166-4963-9019-ee4d8f7bea7f",
+      "text": "It looks like you're looking for guidance on including links! Here\u2019s a quick overview of how to effectively add clickable hyperlinks:\n\n- **Identify the Text**: Choose the text you want to turn into a link.\n- **Insert the Link**: Use the hyperlink tool in your editor (often represented by a chain link icon) and paste the URL.\n- **Test the Link**: After saving, make sure to click the link to ensure it directs correctly.\n\nIf you need more detailed steps or have a specific platform in mind, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T20:51:52.390342",
+      "agent_name": "UR10e",
+      "conversation_id": "2a4394b8-ee9d-4651-a959-ed14fc887086"
+    }
+  ],
+  "d373385f-5b6b-4ed5-8e6d-61e40b4e6562": [
+    {
+      "id": "1fc930a0-785d-4ee5-a812-0bc6a33d1f1d",
+      "text": "how to setup the bot",
+      "sender": "user",
+      "timestamp": "2025-07-28T20:52:50.978424",
+      "agent_name": "UR10e",
+      "conversation_id": "d373385f-5b6b-4ed5-8e6d-61e40b4e6562"
+    },
+    {
+      "id": "9d341efa-28fb-46eb-8f56-5d414e75a3ef",
+      "text": "To set up your UR10e robot, you'll want to follow these steps:\n\n1. **Power On the Robot**:\n   - Press the power button on the Teach Pendant to turn on the robot.\n   \n2. **Insert the Serial Number**:\n   - Select your Control Box type and enter the serial number as it appears on the robot arm. Tap OK to confirm.\n\n3. **Load or Create a Program**:\n   - In the Program and Installation Manager, tap **New...** to create a new program or **Open...** to load an existing one.\n\n4. **Configure Your Program**:\n   - Use the Program tab to add nodes from the left side and configure them on the right side.\n\n5. **Save Your Program**:\n   - Tap **Save...** and choose either **Save All** or **Save Program As...** to keep your changes.\n\nIf you need more details on any of these steps or have specific questions, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-28T20:52:56.675145",
+      "agent_name": "UR10e",
+      "conversation_id": "d373385f-5b6b-4ed5-8e6d-61e40b4e6562"
+    }
+  ],
+  "3f5b16aa-0b10-492e-b7c5-d7ea0b1425a3": [
+    {
+      "id": "02f132fa-870d-45d2-8bf1-0a5f5c7ec624",
+      "text": "What is the maximum payload and reach of the UR10e?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:08:15.617185",
+      "agent_name": "UR10e",
+      "conversation_id": "3f5b16aa-0b10-492e-b7c5-d7ea0b1425a3"
+    },
+    {
+      "id": "cce65ab3-c9d3-4e04-8e1d-c11fc501b856",
+      "text": "The maximum payload of the UR10e is **10 kg** (22 lb), and it has a reach of **1300 mm** (51.2 in). If you need more details about how to configure the robot for different payloads or any specific applications, just let me know! \n\nFor more information, you can check out the [User Manual for UR10e](https://www.universal-robots.com/manuals/EN/PDF/SW5_19/user-manual-UR10e-PDF_online/711-039-00_UR10e_User_Manual_en_Global.pdf).",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:08:21.568265",
+      "agent_name": "UR10e",
+      "conversation_id": "3f5b16aa-0b10-492e-b7c5-d7ea0b1425a3"
+    }
+  ],
+  "b00ffbc6-c4c1-4d6e-99c7-deee97bbf2d4": [
+    {
+      "id": "3a0f9043-1c63-4059-8e16-37a9907f3712",
+      "text": "How do I configure safety planes on the UR10e?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:08:42.642527",
+      "agent_name": "UR10e",
+      "conversation_id": "b00ffbc6-c4c1-4d6e-99c7-deee97bbf2d4"
+    },
+    {
+      "id": "19faaddc-ac90-4607-bab1-ddbb00443b8c",
+      "text": "To configure safety planes on the UR10e, you'll want to follow these steps:\n\n1. **Access the Safety Settings** in PolyScope.\n2. **Define the Safety Plane Properties:**\n   - **Name:** Choose a name for the safety plane.\n   - **Offset from Base:** Set the height of the plane from the base in the -Y direction.\n   - **Tilt:** Specify the tilt of the plane from the power cord.\n   - **Rotation:** Set the rotation of the plane clockwise.\n\n3. **Choose the Mode:** Decide if the plane will be in Normal, Reduced, or Both modes.\n\n4. **Set Elbow Joint Restrictions:** If needed, you can prevent the elbow joint from passing through the defined planes.\n\n5. **Save the Configuration** and verify that the settings are applied.\n\nMake sure to refer to the [UR10e PolyScope X User Manual](https://www.universal-robots.com/manuals/EN/PDF/SW10_6/user-manual-UR10e-PolyX-PDF_online/708-827-00_UR10e%20PolyScope%20X_User_Manual_PolyScopeX_en_Global.pdf) for detailed instructions and safety considerations.\n\nIf you need more details or have specific questions about any of the steps, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:08:49.363328",
+      "agent_name": "UR10e",
+      "conversation_id": "b00ffbc6-c4c1-4d6e-99c7-deee97bbf2d4"
+    }
+  ],
+  "7bbbb013-d0f1-4903-bfd0-05b7ce184618": [
+    {
+      "id": "1093d7db-24c8-4263-8925-317009f413b7",
+      "text": "Explain how to set up emergency stop and enabling device wiring.",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:09:07.845067",
+      "agent_name": "UR10e",
+      "conversation_id": "7bbbb013-d0f1-4903-bfd0-05b7ce184618"
+    },
+    {
+      "id": "a3b3e2f0-05cf-418e-91a6-71631a7784d7",
+      "text": "To set up the emergency stop and enabling device wiring, you'll want to follow these steps:\n\n### Emergency Stop Wiring:\n1. **Connect the COM pin** of the E-stop button to the positive terminal of the power supply.\n2. **Connect the NC (Normally Closed) pin** to the control circuit that needs to be stopped in an emergency.\n3. Ensure all E-stop buttons are wired in series to maintain functionality.\n\n### Enabling Device Wiring:\n1. **Connect the enabling device** to the control circuit that allows operation when activated.\n2. Make sure the enabling device is manually operated and is used in conjunction with a start control.\n\n### Safety Note:\n- Always ensure that the emergency stop system complies with relevant safety standards (like ISO 13850) to prevent any accidents.\n\nIf you need more detailed wiring diagrams or specific part numbers, I can help with that too! Just let me know what you need.",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:09:13.698066",
+      "agent_name": "UR10e",
+      "conversation_id": "7bbbb013-d0f1-4903-bfd0-05b7ce184618"
+    }
+  ],
+  "d6800899-aef3-46a3-8b18-bf000d7d90f2": [
+    {
+      "id": "d3048fff-8d4f-4f9f-992e-ed2fba2cc548",
+      "text": "Show me installation steps for the UR10e control box and teach pendant",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:09:32.950143",
+      "agent_name": "UR10e",
+      "conversation_id": "d6800899-aef3-46a3-8b18-bf000d7d90f2"
+    },
+    {
+      "id": "d964ef86-866b-4043-9cc4-48910a17e7a7",
+      "text": "Sure! Here are the installation steps for the UR10e control box and Teach Pendant:\n\n### To install the 3PE Teach Pendant:\n1. **Insert the Teach Pendant plug and cable** through the bottom of the control box and fully close/tighten the plastic grommet.\n2. **Connect the Teach Pendant** by pushing the plug into the Teach Pendant port.\n3. **Secure the cables** using two new cable ties to prevent any tripping hazards.\n4. **Connect the main power cable** to the power source and power on the control box.\n\n### Safety Note:\nAlways store the Teach Pendant and its cable properly to avoid tripping hazards.\n\nIf you need more detailed instructions or have any specific questions, feel free to ask! You can also check out the [User Manual](https://www.universal-robots.com/manuals/EN/PDF/SW5_19/user-manual-UR10e-PDF_online/711-039-00_UR10e_User_Manual_en_Global.pdf) for additional information.",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:09:39.091930",
+      "agent_name": "UR10e",
+      "conversation_id": "d6800899-aef3-46a3-8b18-bf000d7d90f2"
+    }
+  ],
+  "53b2215e-b600-46a4-b9ab-a627f864e32f": [
+    {
+      "id": "7aa9d85e-334c-4c70-926f-502e0f7e82d3",
+      "text": "Can you link me to the latest UR10e e\u2011Series user manual (SW\u202f5.21)?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:10:06.464234",
+      "agent_name": "UR10e",
+      "conversation_id": "53b2215e-b600-46a4-b9ab-a627f864e32f"
+    },
+    {
+      "id": "6160227f-ae71-457f-aae8-048954361947",
+      "text": "Sure! You can find the latest UR10e e-Series user manual (SW 5.21) at the following link:\n\n- [UR10e e-Series User Manual - SW 5.21](https://www.universal-robots.com/download/manuals-e-seriesur-series/user/ur10e/521/user-manual-ur10e-e-series-sw-521-english-international-en/)\n\nIf you have any specific questions about the manual or need help with anything else, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:10:10.331576",
+      "agent_name": "UR10e",
+      "conversation_id": "53b2215e-b600-46a4-b9ab-a627f864e32f"
+    },
+    {
+      "id": "5a55a02a-2b16-40bb-a7f3-a50d21ff11ce",
+      "text": "From the manuals, show me how to program a basic waypoint sequence on the UR10e using Polyscope",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:18:21.836864",
+      "agent_name": "UR10e",
+      "conversation_id": "53b2215e-b600-46a4-b9ab-a627f864e32f"
+    },
+    {
+      "id": "ab9df0d4-c73f-4e4d-a834-053fed13bab4",
+      "text": "To program a basic waypoint sequence on the UR10e using PolyScope, here\u2019s a quick guide to get you started:\n\n1. **Create a New Program**:\n   - Tap **New...** in the Header File Path and select **Program**.\n\n2. **Add Waypoints**:\n   - Under **Basic**, tap **Waypoint** to add a waypoint. A default **MoveJ** will also be added.\n   - Select the new waypoint, go to the **Command** tab, and tap **Waypoint**.\n   - Move the robot arm using the move arrows or the **Freedrive** button, then press **OK** to save it as **Waypoint_1**.\n   - Repeat to create **Waypoint_2**.\n\n3. **Adjust Movement Order**:\n   - Select **Waypoint_2** and press the **Move Up** arrow to position it above **Waypoint_1**.\n\n4. **Run the Program**:\n   - Stand clear, hold the emergency stop button, and press the **Play** button in the PolyScope Footer to execute the movement between the waypoints.\n\nRemember to keep your head and torso outside the robot's workspace and avoid driving the robot into itself or any objects to prevent damage. If you need more details or have questions about specific steps, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:18:29.178265",
+      "agent_name": "UR10e",
+      "conversation_id": "53b2215e-b600-46a4-b9ab-a627f864e32f"
+    }
+  ],
+  "36f933a0-a12d-49a2-b92f-ace39eeb0fe8": [
+    {
+      "id": "c54371f5-9758-401f-9d9e-c8e1e374d47d",
+      "text": "What is the collision detection or flex-servo control behavior on TA\u20111900?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:12:18.912536",
+      "agent_name": "TA1900",
+      "conversation_id": "36f933a0-a12d-49a2-b92f-ace39eeb0fe8"
+    },
+    {
+      "id": "b0876038-8bfe-4f59-9034-d6dd31f4fd17",
+      "text": "The TA-1900 features advanced collision detection and flex-servo control, similar to other models in the TA/TB series. Here's a quick overview of how it works:\n\n- **Collision Detection:** The manipulator can sense unexpected forces applied to the arm, helping to prevent torch misalignment.\n- **Flex-Servo Control:** Upon detecting a collision, the system quickly switches to flex-servo mode, allowing the arm to release the force and avoid damage to the torch.\n\nThis functionality enhances operational efficiency and safety, making your welding tasks smoother. If you need more detailed information or specific troubleshooting steps, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:12:23.651073",
+      "agent_name": "TA1900",
+      "conversation_id": "36f933a0-a12d-49a2-b92f-ace39eeb0fe8"
+    }
+  ],
+  "a7dd6c9f-2026-4d13-8eb8-eb5b9443af98": [
+    {
+      "id": "e9e23c94-e286-473e-9f1b-b9db571b9f1b",
+      "text": "where to download the TA/TB series robot manual PDF.",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:13:48.131477",
+      "agent_name": "TA1900",
+      "conversation_id": "a7dd6c9f-2026-4d13-8eb8-eb5b9443af98"
+    },
+    {
+      "id": "378c1529-dc51-421a-87a9-e57d313f7cec",
+      "text": "You'll want to check out the following links to download the TA/TB series robot manual PDFs:\n\n- [TB series Manual](https://download.epson-europe.com/pub/download/6495/epson649591eu.pdf)\n- [T-B Robot - Epson](https://files.support.epson.com/far/docs/e_t-b_robot_r6.pdf)\n\nThese should have the information you need! If you have any specific questions about the manuals or need further assistance, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:13:52.693363",
+      "agent_name": "TA1900",
+      "conversation_id": "a7dd6c9f-2026-4d13-8eb8-eb5b9443af98"
+    }
+  ],
+  "622f7847-9609-421f-b4d4-f5306f6428e5": [
+    {
+      "id": "98f80856-8753-481a-bf72-0545156b2874",
+      "text": "List available TA\u20111900 variants and differences (like WG III vs standard).",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:14:22.913091",
+      "agent_name": "TA1900",
+      "conversation_id": "622f7847-9609-421f-b4d4-f5306f6428e5"
+    },
+    {
+      "id": "587ec1af-c3fe-49f4-92ee-a0e87f1fdf04",
+      "text": "It looks like the TA-1900 model is part of the TA series, but the documentation doesn't specify any variants like WG III for this model. The TA series includes several models, such as TA-1000, TA-1400, TA-1600, TA-1800, and TA-1900, but specific differences between variants aren't detailed.\n\nIf you're looking for more specific information about configurations or options for the TA-1900, I recommend checking the product manual or reaching out to your supplier for detailed specifications. Let me know if you need help with anything else!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:14:27.370481",
+      "agent_name": "TA1900",
+      "conversation_id": "622f7847-9609-421f-b4d4-f5306f6428e5"
+    }
+  ],
+  "4eb06f71-46eb-47c6-b064-151cc4e05527": [
+    {
+      "id": "18f20b7a-d7d0-43b6-9d71-092e43a4c36d",
+      "text": "Can you search the web for FAQs or troubleshooting guides about UR10e payload upgrades?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:14:51.140401",
+      "agent_name": "TA1900",
+      "conversation_id": "4eb06f71-46eb-47c6-b064-151cc4e05527"
+    },
+    {
+      "id": "719abeb4-f177-44e8-abdb-cf8cf602c8ff",
+      "text": "Sure! I can help with that. Here\u2019s what I found regarding the UR10e payload upgrades:\n\n- The UR10e is designed to lift a maximum payload of 12.5 kg, even though it was originally named for a 10 kg capacity.\n- For any upgrades or adjustments, you might want to check the user manual for specific instructions on setting the correct payload and Center of Gravity (CoG).\n\nIf you need step-by-step guidance on how to adjust the payload settings or have any specific questions about the process, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:14:55.904575",
+      "agent_name": "TA1900",
+      "conversation_id": "4eb06f71-46eb-47c6-b064-151cc4e05527"
+    }
+  ],
+  "7cc1fcdf-8fd2-492f-b4cd-1c2982536c2a": [
+    {
+      "id": "6222280c-c125-4bb0-8ec9-fa9d47256b09",
+      "text": "yes give step by step guidance on payload upgrading",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:15:22.705644",
+      "agent_name": "TA1900",
+      "conversation_id": "7cc1fcdf-8fd2-492f-b4cd-1c2982536c2a"
+    },
+    {
+      "id": "075256d8-504e-40ff-9529-1726edcc77c5",
+      "text": "To upgrade the payload, you'll want to follow these steps:\n\n1. **Review the Current Specifications**: Check the existing payload specifications to ensure compatibility with the new upgrade.\n2. **Gather Required Components**: Make sure you have all necessary parts for the upgrade, including any specific connectors or harnesses.\n3. **Power Down the System**: Always turn off the power and disconnect the system from any power source to ensure safety.\n4. **Remove the Existing Payload**: Carefully detach the current payload components, noting any wiring or connections for reinstallation.\n5. **Install the New Payload**: Position the new payload in place and connect it according to the wiring diagram provided in the technical documentation.\n6. **Test Connections**: Double-check all connections to ensure they are secure and correctly aligned.\n7. **Power Up the System**: Reconnect the power and turn on the system to test the new payload functionality.\n\nIf you need more detailed information on specific components or wiring diagrams, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:15:28.354393",
+      "agent_name": "TA1900",
+      "conversation_id": "7cc1fcdf-8fd2-492f-b4cd-1c2982536c2a"
+    }
+  ],
+  "1dc83b3a-3d04-4359-874d-8cec86ec5545": [
+    {
+      "id": "a8e91ff3-ee6e-4a8f-b7c7-59a563399f4a",
+      "text": "Locate the community forum where TA\u2011series manuals are shared.",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:17:00.921329",
+      "agent_name": "TA1900",
+      "conversation_id": "1dc83b3a-3d04-4359-874d-8cec86ec5545"
+    },
+    {
+      "id": "ebdff533-7200-42c5-9623-43ad2b0c26dc",
+      "text": "It looks like you might be looking for a community forum where you can find TA-series manuals. While I couldn't find a specific forum dedicated solely to TA-series manuals, you can check out the **Reddit community** where users often share service manuals and user guides. Here\u2019s the link to that discussion: [Free service manuals and user manuals.](https://www.reddit.com/r/cassetteculture/comments/16enxmm/free_service_manuals_and_user_manuals/).\n\nIf you need help navigating or have any other questions, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:17:05.636742",
+      "agent_name": "TA1900",
+      "conversation_id": "1dc83b3a-3d04-4359-874d-8cec86ec5545"
+    }
+  ],
+  "6c64e35f-6d23-4b01-9d27-5ca896dda0c3": [
+    {
+      "id": "8e074472-c84b-4040-acbb-e3e59adfd450",
+      "text": "How to access wiring diagrams for the YA\u20111WAR controller used in TA\u20111900?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:20:29.961118",
+      "agent_name": "TA1900",
+      "conversation_id": "6c64e35f-6d23-4b01-9d27-5ca896dda0c3"
+    },
+    {
+      "id": "10d6fcd8-bb61-4578-acfc-d672426f618d",
+      "text": "To access the wiring diagrams for the YA-1WAR controller used in the TA-1900, you'll want to refer to the technical documentation. Here\u2019s how you can find the information:\n\n- **Check the Operating Instructions**: Look for the section on wiring and connections in the OM1303030E27 manual.\n- **Locate the Wiring Diagrams**: The diagrams are typically included in the controller section, detailing the connections and specifications.\n- **Download the PDF**: You can find the manual online [here](https://industrial.panasonic.com/content/data/WS/PDF/OM1303030E27_YA-1WAR_Controller.pdf) for easy access.\n\nIf you need help with a specific part of the wiring or have further questions, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:20:35.767171",
+      "agent_name": "TA1900",
+      "conversation_id": "6c64e35f-6d23-4b01-9d27-5ca896dda0c3"
+    }
+  ],
+  "1aec08bb-0f7f-4993-9860-7242513baafd": [
+    {
+      "id": "3b2f91eb-8820-4530-bf1b-3400d3dcd589",
+      "text": "Explain SP\u2011MAG\u202fII welding mode and Integrated inverter features.",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:20:52.083218",
+      "agent_name": "TA1900",
+      "conversation_id": "1aec08bb-0f7f-4993-9860-7242513baafd"
+    },
+    {
+      "id": "6fd482a8-c8a7-4195-8a14-0759d6ce586c",
+      "text": "Sure! The SP-MAG II welding mode is designed to enhance mixed gas (MAG) welding, especially on thin plates. Here are some key features:\n\n- **Super-imposition Control**: This feature significantly reduces spatter during welding, achieving up to a 75% reduction compared to conventional welders at 150 A.\n- **Current Waveform Control**: It includes several controls like Initial Short-Circuit Control and Neck Control, which help manage the weld pool and prevent spatter by quickly adjusting the weld current.\n\nAs for the integrated inverter features, the welding power source is an inverter type, which allows for precise control over the output current and voltage. This results in improved efficiency and performance during welding.\n\nIf you\u2019d like more details on any specific aspect or need help with something else, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:20:57.489870",
+      "agent_name": "TA1900",
+      "conversation_id": "1aec08bb-0f7f-4993-9860-7242513baafd"
+    }
+  ],
+  "b6be5a7f-a2aa-44b5-921a-553030ecf8f4": [
+    {
+      "id": "4f987443-5f4e-471f-83cc-d938c9815c76",
+      "text": "Show me where to download the TA/TB series robot manual PDF",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:21:12.990204",
+      "agent_name": "UR10e",
+      "conversation_id": "b6be5a7f-a2aa-44b5-921a-553030ecf8f4"
+    },
+    {
+      "id": "6db0639b-dc2c-4e10-be12-1848b851b38c",
+      "text": "It looks like you're looking for the TA/TB series robot manual PDF. Unfortunately, I don't have direct access to that specific manual, but I found a link that might be helpful for you:\n\n- [TB series Manual](https://download.epson-europe.com/pub/download/6495/epson649591eu.pdf)\n\nYou can download it directly from there. If you need more information or help with something specific in the manual, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:21:16.491181",
+      "agent_name": "UR10e",
+      "conversation_id": "b6be5a7f-a2aa-44b5-921a-553030ecf8f4"
+    }
+  ],
+  "910a428c-84b9-4b2d-928a-f5ce90c169aa": [
+    {
+      "id": "a3cf90fa-f609-487b-bfc4-5829e6070bf8",
+      "text": "Display a link to the Universal Robots FAQ about UR10e max payload 12.5\u202fkg",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:21:56.282774",
+      "agent_name": "UR10e",
+      "conversation_id": "910a428c-84b9-4b2d-928a-f5ce90c169aa"
+    },
+    {
+      "id": "1a064542-54c6-4857-8dea-b1671c9cc5db",
+      "text": "I couldn't find a specific FAQ link for the UR10e max payload of 12.5 kg, but you can check out the user manual for detailed information about the payload specifications. Here\u2019s a link to the [UR10e PolyScope X User Manual](https://www.universal-robots.com/manuals/EN/PDF/SW10_9/user-manual-UR10e-PolyX-PDF_online/718-688-00_UR10e%20PolyScope%20X_User_Manual_PolyScopeX_en_Global.pdf) where you'll find all the relevant details.\n\nIf you have any more questions or need further assistance, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:22:01.010616",
+      "agent_name": "UR10e",
+      "conversation_id": "910a428c-84b9-4b2d-928a-f5ce90c169aa"
+    }
+  ],
+  "47f06717-068b-4173-a5b0-99a507122d3d": [
+    {
+      "id": "05212e0a-0ef2-474c-b172-c5b0f8fca8b3",
+      "text": "Which safety certifications and IEC stop categories does UR10e support?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:22:23.722374",
+      "agent_name": "UR10e",
+      "conversation_id": "47f06717-068b-4173-a5b0-99a507122d3d"
+    },
+    {
+      "id": "19373548-9c1d-47fb-af8c-71d826fc58e8",
+      "text": "The UR10e supports several safety certifications and adheres to IEC stop categories, specifically:\n\n- **Stop Category 0**: Immediate removal of power.\n- **Stop Category 1**: Controlled stop, with power removed after the robot stops.\n- **Stop Category 2**: Maintains power to the drives while stopping, allowing the robot to hold its trajectory.\n\nYou'll want to ensure that your robot application complies with the relevant safety standards and regulations in your country. If you need more details on specific certifications or how to implement these stop categories, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:22:28.211909",
+      "agent_name": "UR10e",
+      "conversation_id": "47f06717-068b-4173-a5b0-99a507122d3d"
+    }
+  ],
+  "842151bf-e3a4-4f13-a837-07955f8b922b": [
+    {
+      "id": "b199402e-5487-4027-9c10-f353125f8b6e",
+      "text": "What is the maximum payload and reach of the UR10e?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:26:57.865033",
+      "agent_name": "UR10e",
+      "conversation_id": "842151bf-e3a4-4f13-a837-07955f8b922b"
+    },
+    {
+      "id": "00c4bf92-13b8-4d7f-9ad7-e2147426a77f",
+      "text": "The maximum payload for the UR10e is **10 kg** (22 lb), and it can reach up to **1300 mm** (51.2 in). If you're considering a higher payload configuration, the UR10e can also handle a **12.5 kg** (27.5 lb) payload under specific conditions. \n\nWould you like more details on how to configure the payload or any other specifications?",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:27:02.679575",
+      "agent_name": "UR10e",
+      "conversation_id": "842151bf-e3a4-4f13-a837-07955f8b922b"
+    }
+  ],
+  "e8b80853-7147-482f-a70c-ccbc3be533ea": [
+    {
+      "id": "6ec2eff7-e246-4da2-b027-81041e141af2",
+      "text": "Explain how to set up emergency stop and enabling device wiring.",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:27:14.465964",
+      "agent_name": "UR10e",
+      "conversation_id": "e8b80853-7147-482f-a70c-ccbc3be533ea"
+    },
+    {
+      "id": "044cade4-d527-421a-9af3-ee039dfb6807",
+      "text": "To set up emergency stop and enabling device wiring, you'll want to follow these steps:\n\n1. **Identify the Emergency Stop Button**: Use the red push-button located on the Teach Pendant for the emergency stop function.\n2. **Configure I/O Functions**: Set up the external emergency stop input and system stop output via the GUI. Remember, the Robot Emergency Stop Input cannot be shared.\n3. **Connect Wiring**: Ensure that your wiring complies with the safety standards (ISO 13850) and that you have a safety PLC if connecting multiple machines.\n\n**Safety Warnings**:\n- Always visually assess the situation before resetting the emergency stop.\n- Make sure that the emergency stop function is compliant with ISO 12100.\n\nIf you need more detailed wiring diagrams or specific part numbers, let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:27:19.322361",
+      "agent_name": "UR10e",
+      "conversation_id": "e8b80853-7147-482f-a70c-ccbc3be533ea"
+    }
+  ],
+  "b5b8c4dd-85b0-41ae-b464-cee8078c810a": [
+    {
+      "id": "2abf29b0-b0bf-447c-bd7b-4592863507da",
+      "text": "Can you link me to the latest UR10e e\u2011Series user manual (SW\u202f5.21)?",
+      "sender": "user",
+      "timestamp": "2025-07-29T13:27:30.659474",
+      "agent_name": "UR10e",
+      "conversation_id": "b5b8c4dd-85b0-41ae-b464-cee8078c810a"
+    },
+    {
+      "id": "4200bc35-e3dd-4ee0-93d9-2cecb658c21c",
+      "text": "Sure! You can find the latest UR10e e-Series user manual (SW 5.21) at this link: [User manual - UR10e e-Series - SW 5.21](https://www.universal-robots.com/download/manuals-e-seriesur-series/user/ur10e/521/user-manual-ur10e-e-series-sw-521-english-international-en/). \n\nIf you have any specific questions about the manual or need help with something else, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T13:27:34.243758",
+      "agent_name": "UR10e",
+      "conversation_id": "b5b8c4dd-85b0-41ae-b464-cee8078c810a"
+    }
+  ],
+  "ec544d3e-b344-4f9c-8bfa-c8263bcf05fb": [
+    {
+      "id": "ce9de32f-8f4a-41ef-a602-52dd1a95b2be",
+      "text": "What is the maximum payload and reach of the UR10e?",
+      "sender": "user",
+      "timestamp": "2025-07-29T14:16:40.045550",
+      "agent_name": "UR10e",
+      "conversation_id": "ec544d3e-b344-4f9c-8bfa-c8263bcf05fb"
+    },
+    {
+      "id": "736cf1ca-5acb-45b2-8864-f90815bac017",
+      "text": "The UR10e has a maximum payload of **10 kg** (or **12.5 kg** for specific configurations) and a reach of **1300 mm** (approximately **51.2 inches**). \n\nIf you need more details about how to configure the payload or any specific applications, just let me know! You can also check out the [User Manual](https://www.universal-robots.com/manuals/EN/PDF/SW5_19/user-manual-UR10e-PDF_online/711-039-00_UR10e_User_Manual_en_Global.pdf) for more information.",
+      "sender": "bot",
+      "timestamp": "2025-07-29T14:16:45.114072",
+      "agent_name": "UR10e",
+      "conversation_id": "ec544d3e-b344-4f9c-8bfa-c8263bcf05fb"
+    }
+  ],
+  "89c3d546-a688-48c9-ba21-c0382a198aac": [
+    {
+      "id": "a27ca3f0-04ce-481e-8a42-b351dd3a464b",
+      "text": "Explain how to set up emergency stop and enabling device wiring.",
+      "sender": "user",
+      "timestamp": "2025-07-29T14:16:58.952606",
+      "agent_name": "UR10e",
+      "conversation_id": "89c3d546-a688-48c9-ba21-c0382a198aac"
+    },
+    {
+      "id": "309b4011-905c-4183-8524-3a11faa649c4",
+      "text": "To set up the emergency stop and enabling device wiring, you'll want to follow these general steps:\n\n### Emergency Stop Setup:\n- **Identify the E-stop button**: This is typically a red push-button located on the Teach Pendant.\n- **Wiring**: Connect the COM pin of the E-stop button to the positive terminal of your power supply. The NC (Normally Closed) pin should be connected to the control circuit that needs to be stopped in an emergency.\n- **Testing**: After wiring, test the E-stop to ensure it immediately stops all robot motion when pressed.\n\n### Enabling Device Wiring:\n- **Connect the enabling device**: This should be wired in conjunction with your start control. Ensure it\u2019s set up to allow operation only when the device is activated.\n- **Safety Check**: Always verify that the enabling device is functioning correctly before starting operations.\n\n### Important Safety Note:\n- Make sure to comply with safety standards like ISO 13850 and IEC 60204-1 when setting up your emergency stop and enabling devices.\n\nIf you need more detailed instructions or specific part numbers, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T14:17:05.434939",
+      "agent_name": "UR10e",
+      "conversation_id": "89c3d546-a688-48c9-ba21-c0382a198aac"
+    }
+  ],
+  "8074bb25-3389-4155-98d5-f0877cb1db58": [
+    {
+      "id": "f66fa826-3ef4-4ea3-b672-57099db65ba1",
+      "text": "Can you link me to the latest UR10e e\u2011Series user manual (SW\u202f5.21)?",
+      "sender": "user",
+      "timestamp": "2025-07-29T14:17:18.207700",
+      "agent_name": "UR10e",
+      "conversation_id": "8074bb25-3389-4155-98d5-f0877cb1db58"
+    },
+    {
+      "id": "7289d677-722a-429c-b7f0-aa3b7099e1dd",
+      "text": "Sure! You can find the latest UR10e e-Series user manual (SW 5.21) at the following link:\n\n- [UR10e e-Series User Manual - SW 5.21](https://www.universal-robots.com/download/manuals-e-seriesur-series/user/ur10e/521/user-manual-ur10e-e-series-sw-521-english-international-en/)\n\nIf you need any specific information from the manual or have questions about its contents, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T14:17:22.292492",
+      "agent_name": "UR10e",
+      "conversation_id": "8074bb25-3389-4155-98d5-f0877cb1db58"
+    }
+  ],
+  "a173f38d-4f41-4e3c-a5d4-c5ddb64f5125": [
+    {
+      "id": "c990e585-0f81-4ca5-9c1a-4855ca05991b",
+      "text": "Explain SP\u2011MAG\u202fII welding mode and Integrated inverter features.",
+      "sender": "user",
+      "timestamp": "2025-07-29T14:17:46.994969",
+      "agent_name": "TA1900",
+      "conversation_id": "a173f38d-4f41-4e3c-a5d4-c5ddb64f5125"
+    },
+    {
+      "id": "88ab831f-aa4d-4dc2-b099-1f22d06709b5",
+      "text": "Sure! The SP-MAG II welding mode is designed to enhance the efficiency of mixed gas (MAG) welding, particularly on thin plates. Here are some key features:\n\n- **Super-imposition Control**: This significantly reduces spatter during welding, achieving up to a 75% reduction compared to conventional welders at 150 A.\n- **Current Waveform Control**: It includes several controls like Initial Short-Circuit Control and Neck Control, which help manage the weld current to prevent spatter and improve the quality of the weld.\n\nAs for the integrated inverter features, the welding power source is an inverter type, which allows for precise control over the output current and voltage. This contributes to better welding performance and efficiency.\n\nIf you want more details on how to set up or use these features, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T14:17:52.088423",
+      "agent_name": "TA1900",
+      "conversation_id": "a173f38d-4f41-4e3c-a5d4-c5ddb64f5125"
+    }
+  ],
+  "dd38eb21-15f3-4cee-a752-2b102bdee42d": [
+    {
+      "id": "7839be6f-4847-46fe-bd16-b148a8227c52",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-29T15:14:00.101103",
+      "agent_name": "UR10e",
+      "conversation_id": "dd38eb21-15f3-4cee-a752-2b102bdee42d"
+    },
+    {
+      "id": "dcd544d6-1427-44e9-986d-519a0bf7db4a",
+      "text": "Hey there! It looks like you're looking for some assistance. How can I help you today? If you have a specific question about the UR10e robot or need guidance on a particular task, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T15:14:04.309066",
+      "agent_name": "UR10e",
+      "conversation_id": "dd38eb21-15f3-4cee-a752-2b102bdee42d"
+    }
+  ],
+  "fbe9eef4-aaf3-4721-bbd8-191adaff5fe0": [
+    {
+      "id": "c73fa3bf-a075-4855-b468-ad803f586ae8",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-29T15:16:47.703220",
+      "agent_name": "UR10e",
+      "conversation_id": "fbe9eef4-aaf3-4721-bbd8-191adaff5fe0"
+    },
+    {
+      "id": "91cf36b6-29a4-4057-8266-47351f1153ce",
+      "text": "Hey there! How can I assist you today? If you have any questions about the UR10e robot or need help with something specific, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T15:16:50.743360",
+      "agent_name": "UR10e",
+      "conversation_id": "fbe9eef4-aaf3-4721-bbd8-191adaff5fe0"
+    }
+  ],
+  "8b638da5-b93e-40a8-aafb-d8726060b744": [
+    {
+      "id": "a4185922-8915-4ccc-9910-2877a0d9f366",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-29T15:18:03.872321",
+      "agent_name": "Boiler",
+      "conversation_id": "8b638da5-b93e-40a8-aafb-d8726060b744"
+    },
+    {
+      "id": "5de571a7-dc43-4232-9c56-4468faca2a0a",
+      "text": "Hey there! How can I assist you today? If you have a specific question about boiler maintenance or spare parts, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T15:18:07.809716",
+      "agent_name": "Boiler",
+      "conversation_id": "8b638da5-b93e-40a8-aafb-d8726060b744"
+    }
+  ],
+  "b3751344-6a72-4239-a931-5b1979300cf3": [
+    {
+      "id": "bd0f119f-1738-4942-bce0-a429ac245138",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-29T15:19:41.413237",
+      "agent_name": "Boiler",
+      "conversation_id": "b3751344-6a72-4239-a931-5b1979300cf3"
+    },
+    {
+      "id": "06aa699b-7322-4855-859f-cabe3864d867",
+      "text": "Hey there! How can I assist you today? If you have any questions about maintenance, parts, or troubleshooting, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T15:19:44.267300",
+      "agent_name": "Boiler",
+      "conversation_id": "b3751344-6a72-4239-a931-5b1979300cf3"
+    }
+  ],
+  "9ad9e5fb-2f97-4d63-9067-824594489e1d": [
+    {
+      "id": "834b7be9-f7cf-47f1-8f0e-6de82825f5bb",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-29T15:21:12.099817",
+      "agent_name": "Boiler",
+      "conversation_id": "9ad9e5fb-2f97-4d63-9067-824594489e1d"
+    },
+    {
+      "id": "76b666d1-0b31-4c81-85f8-806a975b32a5",
+      "text": "Hey there! How can I assist you today? If you have a specific question about maintenance or parts, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T15:21:14.944543",
+      "agent_name": "Boiler",
+      "conversation_id": "9ad9e5fb-2f97-4d63-9067-824594489e1d"
+    }
+  ],
+  "5f935ca3-8935-417d-a4bd-6bd592d5078a": [
+    {
+      "id": "5a84f1d6-904d-4d3b-9a17-ed56be55bf38",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-29T15:23:20.419233",
+      "agent_name": "Boiler",
+      "conversation_id": "5f935ca3-8935-417d-a4bd-6bd592d5078a"
+    },
+    {
+      "id": "334dd9f2-9052-4322-8459-e7aba6f45d34",
+      "text": "Hey there! How can I assist you today? If you have a specific question about boiler maintenance or spare parts, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T15:23:23.563398",
+      "agent_name": "Boiler",
+      "conversation_id": "5f935ca3-8935-417d-a4bd-6bd592d5078a"
+    },
+    {
+      "id": "a605e597-346a-41d3-baf1-ab1791d677f6",
+      "text": "hello",
+      "sender": "user",
+      "timestamp": "2025-07-29T15:52:03.738173",
+      "agent_name": "Boiler",
+      "conversation_id": "5f935ca3-8935-417d-a4bd-6bd592d5078a"
+    },
+    {
+      "id": "8abeb36a-df00-4137-8694-1c47718cb202",
+      "text": "Hello! How can I assist you today? If you have any questions about the Revomax steam generator or need help with maintenance, feel free to ask!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T15:52:07.823658",
+      "agent_name": "Boiler",
+      "conversation_id": "5f935ca3-8935-417d-a4bd-6bd592d5078a"
+    }
+  ],
+  "f53de026-30d7-464f-9589-03be55c5745e": [
+    {
+      "id": "be852164-6d02-43c1-8076-f10ddb2be8e1",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-29T15:38:24.032455",
+      "agent_name": "UR10e",
+      "conversation_id": "f53de026-30d7-464f-9589-03be55c5745e"
+    },
+    {
+      "id": "ffce1a8e-0de3-4808-ab9a-339a143cbd66",
+      "text": "Hey there! How can I assist you today? If you have questions about the UR10e robot or need help with something specific, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T15:38:27.620297",
+      "agent_name": "UR10e",
+      "conversation_id": "f53de026-30d7-464f-9589-03be55c5745e"
+    }
+  ],
+  "f527a0c9-9522-4cd0-83dc-c6634e4eccdf": [
+    {
+      "id": "abfd9c5f-4340-43a8-81db-7ae5fab4b579",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-29T16:13:15.497450",
+      "agent_name": "UR10e",
+      "conversation_id": "f527a0c9-9522-4cd0-83dc-c6634e4eccdf"
+    },
+    {
+      "id": "48ebf71c-93a3-4fdc-89fa-2c117580ac57",
+      "text": "Hey there! It looks like you're looking for some information. How can I assist you today? If you have a specific question about the UR10e robot or need help with something else, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T16:13:19.076536",
+      "agent_name": "UR10e",
+      "conversation_id": "f527a0c9-9522-4cd0-83dc-c6634e4eccdf"
+    }
+  ],
+  "1506d633-0f72-4a66-a6d6-149f92bd251e": [
+    {
+      "id": "4160bbb1-1ee0-4fa6-b9be-5fe255309402",
+      "text": "whats algomaster",
+      "sender": "user",
+      "timestamp": "2025-07-29T16:21:06.132503",
+      "agent_name": "Test",
+      "conversation_id": "1506d633-0f72-4a66-a6d6-149f92bd251e"
+    },
+    {
+      "id": "ab34dda1-7cec-4269-ba6f-ceb1ae7a30c6",
+      "text": "AlgoMaster is a comprehensive platform designed to help you master software engineering interviews. Here\u2019s what you can expect:\n\n- **Structured Learning**: It offers systematic learning tracks for Data Structures and Algorithms, System Design, and Low-Level Design.\n- **Practice Problems**: You can practice coding problems grouped by patterns, making it easier to recognize common solutions.\n- **Community Support**: Join a growing community of over 550,000 learners worldwide!\n\nIf you want to dive deeper into specific features or need help getting started, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-29T16:21:10.729353",
+      "agent_name": "Test",
+      "conversation_id": "1506d633-0f72-4a66-a6d6-149f92bd251e"
+    }
+  ],
+  "d9073bd5-d86e-46d9-82b5-ed198d427d4a": [
+    {
+      "id": "dfe4f3f2-7978-4c71-8954-69eef960f6c0",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:03:25.404890",
+      "agent_name": "test",
+      "conversation_id": "d9073bd5-d86e-46d9-82b5-ed198d427d4a"
+    },
+    {
+      "id": "5af6db84-27af-464f-9507-674c26d165a0",
+      "text": "Hey there! How can I assist you today? If you have a specific question or need help with something, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:03:29.545565",
+      "agent_name": "test",
+      "conversation_id": "d9073bd5-d86e-46d9-82b5-ed198d427d4a"
+    }
+  ],
+  "bacc68c8-0461-4116-8327-e09012286fd5": [
+    {
+      "id": "a4d5a425-5803-4dbd-9961-2f43dad18c26",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:05:49.175135",
+      "agent_name": "test",
+      "conversation_id": "bacc68c8-0461-4116-8327-e09012286fd5"
+    },
+    {
+      "id": "901aa1d8-1af8-46f4-b28e-e8c984863a03",
+      "text": "Hey! It looks like you're asking about \"hey,\" which could refer to a few things. Are you looking for information about the HEY email service, the load testing tool, or something else? Let me know, and I\u2019ll be happy to help you out!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:05:52.310366",
+      "agent_name": "test",
+      "conversation_id": "bacc68c8-0461-4116-8327-e09012286fd5"
+    }
+  ],
+  "76de4713-5f9a-4c66-886a-de44f45715d4": [
+    {
+      "id": "3a43242f-44cb-4895-8818-447eff05fc92",
+      "text": "how do I turn it on",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:06:12.612929",
+      "agent_name": "UR10e",
+      "conversation_id": "76de4713-5f9a-4c66-886a-de44f45715d4"
+    },
+    {
+      "id": "11959469-6fd6-434a-ba4e-5af87b6db3e0",
+      "text": "Hey there! To turn on your UR10e robot, you'll want to follow these steps:\n\n- Tap the **Initialize** button located at the bottom left of the PolyScope screen.\n- The robot will start its initialization process, showing a yellow circle with \"Robot Active.\"\n- Then, press **START** to release the brakes and bring the robot into active mode.\n\nOnce the brakes are released and the robot is in normal mode, you're all set to start programming or moving it. If you'd like, I can guide you through the entire startup process or help with anything else!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:06:17.132301",
+      "agent_name": "UR10e",
+      "conversation_id": "76de4713-5f9a-4c66-886a-de44f45715d4"
+    }
+  ],
+  "424b9f47-29a0-4197-bdf5-ba6571131a7d": [
+    {
+      "id": "8290c741-16e6-4ff1-b363-81dedecf8db5",
+      "text": "help me troubleshoot it",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:06:29.758891",
+      "agent_name": "UR10e",
+      "conversation_id": "424b9f47-29a0-4197-bdf5-ba6571131a7d"
+    },
+    {
+      "id": "f52d8e42-7949-4499-865a-789cdfdf51a1",
+      "text": "Sure, I can help you troubleshoot! Could you tell me what specific issue you're experiencing with the UR10e robot? For example, is it not powering on, showing an error, or not moving as expected? That way, I can give you more targeted steps.",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:06:33.273887",
+      "agent_name": "UR10e",
+      "conversation_id": "424b9f47-29a0-4197-bdf5-ba6571131a7d"
+    }
+  ],
+  "ec122df3-9556-47da-b9a5-202ec45a2880": [
+    {
+      "id": "94d61d7a-6ff0-4ed9-ac25-a27d61729452",
+      "text": "showing error",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:06:47.810750",
+      "agent_name": "UR10e",
+      "conversation_id": "ec122df3-9556-47da-b9a5-202ec45a2880"
+    },
+    {
+      "id": "6ae8e9ba-1a36-4a08-a027-c7e52cebc953",
+      "text": "Hi there! If you're seeing an error message on your UR10e or UR robot, you'll want to start by checking the log entries in the PolyScope interface. Look for the error severity (like Fault or Violation) and any attached details to understand what's going on. If there's a paper clip icon, you can save a detailed report to a USB drive for further analysis. Want help with interpreting a specific error message or steps to clear it?",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:06:51.317479",
+      "agent_name": "UR10e",
+      "conversation_id": "ec122df3-9556-47da-b9a5-202ec45a2880"
+    }
+  ],
+  "b1aed755-1cce-4daa-a98f-3b06055baed9": [
+    {
+      "id": "e72c414e-94bd-4a0c-a44a-1143e8033514",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:14:47.535236",
+      "agent_name": "UR10e",
+      "conversation_id": "b1aed755-1cce-4daa-a98f-3b06055baed9"
+    },
+    {
+      "id": "012df557-6159-44ad-951f-82d24d2f53bc",
+      "text": "Hey! It looks like you just said \"hey.\" How can I assist you today? Are you looking for help with the UR10e robot, troubleshooting, or something else? Just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:14:52.055741",
+      "agent_name": "UR10e",
+      "conversation_id": "b1aed755-1cce-4daa-a98f-3b06055baed9"
+    }
+  ],
+  "c4668f7a-8034-4cf3-91b8-9b9a4de187d1": [
+    {
+      "id": "9df6b64e-234b-40fe-86f1-f0bf31337766",
+      "text": "error",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:15:12.755061",
+      "agent_name": "UR10e",
+      "conversation_id": "c4668f7a-8034-4cf3-91b8-9b9a4de187d1"
+    },
+    {
+      "id": "fa42843d-12ad-4816-b8e4-5d4d5989478a",
+      "text": "Hi there! It looks like you're encountering an error. To help you best, could you tell me more about the specific error message or code you're seeing? If you're using the UR10e, you can also generate a support file via the Log screen\u2014just tap \"Support file\" and follow the prompts. This report can help diagnose the issue more quickly. Let me know more details, and I\u2019ll guide you from there!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:15:16.734644",
+      "agent_name": "UR10e",
+      "conversation_id": "c4668f7a-8034-4cf3-91b8-9b9a4de187d1"
+    }
+  ],
+  "d25b6644-0f66-4985-8752-e1d0ae1b80f9": [
+    {
+      "id": "d5d5a2a7-56a6-4787-a65d-ed6109f20360",
+      "text": "help me start it after error trouble shooting",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:15:55.935384",
+      "agent_name": "UR10e",
+      "conversation_id": "d25b6644-0f66-4985-8752-e1d0ae1b80f9"
+    },
+    {
+      "id": "65b42e5e-5747-48f4-9389-1783dab631b5",
+      "text": "Hi! If you're encountering an error during startup and want to get the robot running again, you'll want to follow the troubleshooting steps specific to your situation. \n\nHere's a quick guide to help you restart the robot after an error:\n\n- **Check the error message** on PolyScope to identify the specific issue.\n- **Ensure safety**: Confirm all safety configurations are correct and the robot is in a safe state.\n- **Reinitialize the robot**:\n  - Tap the **Initialize** button in the Footer (bottom left).\n  - Wait for the yellow **Robot Active** indicator.\n- **Release the brakes**:\n  - Tap **START** to release the joint brakes.\n  - Wait until the circles turn green, indicating the robot is in **Normal Mode**.\n- **Start your program**:\n  - Light-press and hold the **3PE button**.\n  - On PolyScope, press and hold **Automove** to move to the start position.\n  - Maintain the **3PE button** pressed to run your program.\n\nIf the error persists, it might be helpful to check the specific error code or message and consult the manual section on troubleshooting or safety configuration. Would you like me to walk you through a particular error message?",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:16:11.838760",
+      "agent_name": "UR10e",
+      "conversation_id": "d25b6644-0f66-4985-8752-e1d0ae1b80f9"
+    }
+  ],
+  "2945e66b-662d-4ecd-957b-7ace390a4dc1": [
+    {
+      "id": "b713261c-87bb-4473-9b7c-8e735ef6be71",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:17:00.851249",
+      "agent_name": "UR10e",
+      "conversation_id": "2945e66b-662d-4ecd-957b-7ace390a4dc1"
+    },
+    {
+      "id": "cebd9336-ff4c-4d5d-9ba0-8ed6c7a7336a",
+      "text": "Hey! It looks like you're just saying \"hey.\" How can I assist you today? Are you looking for help with the UR10e robot, or is there something else on your mind?",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:17:04.426981",
+      "agent_name": "UR10e",
+      "conversation_id": "2945e66b-662d-4ecd-957b-7ace390a4dc1"
+    }
+  ],
+  "605ea4d6-b869-4184-ac61-e0a9aaa321bb": [
+    {
+      "id": "d07a3a91-db4f-4d65-87b9-4f089ffbcc38",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:20:15.286811",
+      "agent_name": "UR10e",
+      "conversation_id": "605ea4d6-b869-4184-ac61-e0a9aaa321bb"
+    },
+    {
+      "id": "d0d96fdc-0016-4587-90ba-7c0f9c46cb60",
+      "text": "Hey! It looks like you just said \"hey.\" How can I assist you today? Are you looking for help with the UR10e robot, troubleshooting, or something else? Let me know, and I\u2019ll be happy to guide you!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:20:18.346748",
+      "agent_name": "UR10e",
+      "conversation_id": "605ea4d6-b869-4184-ac61-e0a9aaa321bb"
+    }
+  ],
+  "837ae99e-89f6-4c8d-aa05-047afa05f681": [
+    {
+      "id": "1d410bbe-012a-4943-8d04-95d409e5ee12",
+      "text": "start up guide",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:20:26.183217",
+      "agent_name": "UR10e",
+      "conversation_id": "837ae99e-89f6-4c8d-aa05-047afa05f681"
+    },
+    {
+      "id": "0c8346ba-80f2-4daa-9906-164430254d77",
+      "text": "Hey there! If you're looking to start up your UR10e robot, here's a quick overview to get you going:\n\n- Make sure the robot arm and Control Box are properly installed first.\n- On the Teach Pendant, press the emergency stop button, then turn on the power.\n- Follow the prompts to initialize the system, including unlocking the E-stop and setting the payload.\n- Tap \"Go to Initialize Screen,\" then press \"ON\" to get the robot to Idle.\n- Finally, release the brakes by tapping \"Start,\" and your robot will be ready for programming.\n\nIf you'd like, I can walk you through each step in more detail or point you to the full startup guide!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:20:32.053385",
+      "agent_name": "UR10e",
+      "conversation_id": "837ae99e-89f6-4c8d-aa05-047afa05f681"
+    }
+  ],
+  "d11ed110-f79c-4032-bf71-76edd2996e6f": [
+    {
+      "id": "0b05d625-779a-4a5a-bcc7-19e2081401a0",
+      "text": "what did I tell you so far",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:21:09.261278",
+      "agent_name": "UR10e",
+      "conversation_id": "d11ed110-f79c-4032-bf71-76edd2996e6f"
+    },
+    {
+      "id": "b5653965-6783-4a2b-b498-3ae40d218259",
+      "text": "Sure! So far, you've mentioned the UR10e robot and its safety certificates, along with some details about the UR Connect diagnostics feature. You haven't shared specific issues or questions yet, but I\u2019m here to help with anything related to maintenance, troubleshooting, or understanding the documentation. Just let me know what you need!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:21:14.768517",
+      "agent_name": "UR10e",
+      "conversation_id": "d11ed110-f79c-4032-bf71-76edd2996e6f"
+    }
+  ],
+  "3d191fb4-edb4-430d-b145-32f401ca7838": [
+    {
+      "id": "377c4ba9-83f1-4484-a2e0-f82199e91240",
+      "text": "give start up guide",
+      "sender": "user",
+      "timestamp": "2025-07-30T10:24:53.458323",
+      "agent_name": "UR10e",
+      "conversation_id": "3d191fb4-edb4-430d-b145-32f401ca7838"
+    },
+    {
+      "id": "3d211696-7798-46ef-a86a-74c055f7d8b5",
+      "text": "Hi! If you're looking to get started with your Universal Robots UR10e, here's a quick startup guide to help you out:\n\n- **Ensure proper installation** of the robot arm and control box before powering up.\n- On the Teach Pendant, press the **emergency stop button**, then the **power button** to turn on the system.\n- When the system is ready, tap **Go to Initialize Screen** on the popup, unlock the emergency stop, and then tap **ON** on the Initialize screen.\n- Verify the payload and mounting position, then tap **Start** to release the brake and get the robot ready for programming.\n\nFor more detailed steps, you can check out the official quick start guide here: [Universal Robots Academy](https://www.universal-robots.com/academy/). Let me know if you'd like a walkthrough of any specific part!",
+      "sender": "bot",
+      "timestamp": "2025-07-30T10:25:00.575545",
+      "agent_name": "UR10e",
+      "conversation_id": "3d191fb4-edb4-430d-b145-32f401ca7838"
+    }
+  ],
+  "4fde73d7-1dc9-43ed-9ffa-9cc5c9a1b03d": [
+    {
+      "id": "2e594940-770d-4d2c-9648-f30feeaef501",
+      "text": "hey",
+      "sender": "user",
+      "timestamp": "2025-08-02T20:27:00.051983",
+      "agent_name": "UR10e",
+      "conversation_id": "4fde73d7-1dc9-43ed-9ffa-9cc5c9a1b03d"
+    },
+    {
+      "id": "85bc66b1-5581-4123-88fd-753732a97301",
+      "text": "Hey there! How can I assist you today? If you have any questions about the UR10e robot or need help with something specific, just let me know!",
+      "sender": "bot",
+      "timestamp": "2025-08-02T20:27:04.043018",
+      "agent_name": "UR10e",
+      "conversation_id": "4fde73d7-1dc9-43ed-9ffa-9cc5c9a1b03d"
     }
   ]
 }

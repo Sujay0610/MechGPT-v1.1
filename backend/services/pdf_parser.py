@@ -189,12 +189,177 @@ class PDFParserService:
             raise Exception(f"Failed to extract text: {str(e)}")
     
     async def get_parser_status(self) -> Dict[str, Any]:
-        """
-        Get the status of the PDF parser service
-        """
+        """Get the status of the PDF parser service"""
         return {
             "service": "PDFParserService",
-            "llamaparse_configured": self.parser is not None,
-            "api_key_present": bool(self.api_key),
-            "status": "active" if self.parser else "limited"
+            "status": "active" if self.parser else "inactive",
+            "api_key_configured": bool(self.api_key),
+            "parser_configured": bool(self.parser),
+            "timestamp": datetime.now().isoformat()
         }
+    
+    async def parse_text(self, content: str, title: str = "Text Content") -> List[Dict[str, Any]]:
+        """Parse text content and return chunks"""
+        try:
+            # Create a document from the text content
+            document = Document(text=content, metadata={"title": title, "source": "text_input"})
+            
+            # Split the text into chunks
+            nodes = self.text_splitter.get_nodes_from_documents([document])
+            
+            chunks = []
+            for i, node in enumerate(nodes):
+                chunk_id = str(uuid.uuid4())
+                chunk = {
+                    "text": node.text.strip(),
+                    "metadata": {
+                        "source": title,
+                        "chunk_index": i,
+                        "total_chunks": len(nodes),
+                        "content_type": "text",
+                        "created_at": datetime.now().isoformat(),
+                        "title": title,
+                        "filename": f"{title}.txt",
+                        "chunk_id": chunk_id
+                    },
+                    "chunk_id": chunk_id
+                }
+                if chunk["text"]:  # Only add non-empty chunks
+                    chunks.append(chunk)
+            
+            return chunks
+            
+        except Exception as e:
+            print(f"Error parsing text content: {e}")
+            return []
+    
+    async def parse_url(self, url: str) -> List[Dict[str, Any]]:
+        """Crawl a URL and parse its content into chunks"""
+        try:
+            # Try crawl4ai first, fallback to requests if it fails
+            try:
+                from crawl4ai import AsyncWebCrawler
+                
+                # Use simple configuration for Windows compatibility
+                async with AsyncWebCrawler(verbose=False) as crawler:
+                    result = await crawler.arun(url=url)
+                    
+                    if result.success and (result.markdown or result.cleaned_html):
+                        title = getattr(result, 'title', None) or url.split('/')[-1] or "Web Page"
+                        content = result.markdown or result.cleaned_html
+                        
+                        # Create a document from the crawled content
+                        document = Document(
+                            text=content, 
+                            metadata={
+                                "title": title, 
+                                "source": url,
+                                "url": url
+                            }
+                        )
+                        
+                        # Split the content into chunks
+                        nodes = self.text_splitter.get_nodes_from_documents([document])
+                        
+                        chunks = []
+                        for i, node in enumerate(nodes):
+                            chunk_id = str(uuid.uuid4())
+                            chunk = {
+                                "text": node.text.strip(),
+                                "metadata": {
+                                    "source": title,
+                                    "url": url,
+                                    "chunk_index": i,
+                                    "total_chunks": len(nodes),
+                                    "content_type": "web_page",
+                                    "created_at": datetime.now().isoformat(),
+                                    "title": title,
+                                    "filename": f"{title}.html",
+                                    "chunk_id": chunk_id
+                                },
+                                "chunk_id": chunk_id
+                            }
+                            if chunk["text"]:  # Only add non-empty chunks
+                                chunks.append(chunk)
+                        
+                        return chunks
+                    else:
+                        print(f"Crawl4ai failed for {url}, trying fallback method")
+                        raise Exception("Crawl4ai failed")
+                        
+            except Exception as crawl4ai_error:
+                print(f"Crawl4ai error: {crawl4ai_error}. Using fallback method...")
+                
+                # Fallback to simple requests + BeautifulSoup
+                import requests
+                from bs4 import BeautifulSoup
+                import re
+                
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+                
+                response = requests.get(url, headers=headers, timeout=30)
+                response.raise_for_status()
+                
+                soup = BeautifulSoup(response.content, 'html.parser')
+                
+                # Extract title
+                title_tag = soup.find('title')
+                title = title_tag.get_text().strip() if title_tag else url.split('/')[-1] or "Web Page"
+                
+                # Remove script and style elements
+                for script in soup(["script", "style"]):
+                    script.decompose()
+                
+                # Get text content
+                content = soup.get_text()
+                
+                # Clean up text
+                lines = (line.strip() for line in content.splitlines())
+                chunks_text = '\n'.join(chunk for chunk in lines if chunk)
+                
+                if not chunks_text:
+                    print(f"No content extracted from {url}")
+                    return []
+                
+                # Create a document from the extracted content
+                document = Document(
+                    text=chunks_text, 
+                    metadata={
+                        "title": title, 
+                        "source": url,
+                        "url": url
+                    }
+                )
+                
+                # Split the content into chunks
+                nodes = self.text_splitter.get_nodes_from_documents([document])
+                
+                chunks = []
+                for i, node in enumerate(nodes):
+                    chunk_id = str(uuid.uuid4())
+                    chunk = {
+                        "text": node.text.strip(),
+                        "metadata": {
+                            "source": title,
+                            "url": url,
+                            "chunk_index": i,
+                            "total_chunks": len(nodes),
+                            "content_type": "web_page",
+                            "created_at": datetime.now().isoformat(),
+                            "title": title,
+                            "filename": f"{title}.html",
+                            "chunk_id": chunk_id,
+                            "extraction_method": "fallback_requests"
+                        },
+                        "chunk_id": chunk_id
+                    }
+                    if chunk["text"]:  # Only add non-empty chunks
+                        chunks.append(chunk)
+                
+                return chunks
+                
+        except Exception as e:
+            print(f"Error crawling URL {url}: {e}")
+            return []

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, ReactNode } from 'react'
+import axios from 'axios'
 
 interface Message {
   id: string
@@ -28,6 +29,7 @@ interface ChatContextType {
   loadAgentConversations: (agentName: string) => Promise<void>
   createNewConversation: () => void
   deleteConversation: (conversationId: string) => Promise<void>
+  setCurrentConversationId: (conversationId: string | null) => void
   isLoading: boolean
   setIsLoading: (loading: boolean) => void
 }
@@ -39,6 +41,12 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [conversations, setConversations] = useState<Conversation[]>([])
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+
+  // Helper function to get auth headers
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem('auth_token')
+    return token ? { Authorization: `Bearer ${token}` } : {}
+  }
 
   const addMessage = (text: string, sender: 'user' | 'bot') => {
     const newMessage: Message = {
@@ -63,9 +71,11 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const loadConversation = async (conversationId: string) => {
     try {
       setIsLoading(true)
-      const response = await fetch(`/api/conversations/${conversationId}`)
-      if (response.ok) {
-        const history = await response.json()
+      const response = await axios.get(`/api/conversations/${conversationId}`, {
+        headers: getAuthHeaders()
+      })
+      if (response.data) {
+        const history = response.data
         const loadedMessages = history.messages.map((msg: any) => ({
           id: msg.id,
           text: msg.text,
@@ -84,10 +94,11 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
   const loadAgentConversations = async (agentName: string) => {
     try {
-      const response = await fetch(`/api/agents/${agentName}/conversations`)
-      if (response.ok) {
-        const agentConversations = await response.json()
-        setConversations(agentConversations)
+      const response = await axios.get(`/api/agents/${agentName}/conversations`, {
+        headers: getAuthHeaders()
+      })
+      if (response.data) {
+        setConversations(response.data)
       }
     } catch (error) {
       console.error('Error loading agent conversations:', error)
@@ -96,14 +107,13 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
   const deleteConversation = async (conversationId: string) => {
     try {
-      const response = await fetch(`/api/conversations/${conversationId}`, {
-        method: 'DELETE'
+      const response = await axios.delete(`/api/conversations/${conversationId}`, {
+        headers: getAuthHeaders()
       })
-      if (response.ok) {
-        setConversations(prev => prev.filter(conv => conv.id !== conversationId))
-        if (currentConversationId === conversationId) {
-          clearMessages()
-        }
+      // Axios throws on error status codes, so if we reach here, it was successful
+      setConversations(prev => prev.filter(conv => conv.id !== conversationId))
+      if (currentConversationId === conversationId) {
+        clearMessages()
       }
     } catch (error) {
       console.error('Error deleting conversation:', error)
@@ -121,6 +131,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       loadAgentConversations,
       createNewConversation,
       deleteConversation,
+      setCurrentConversationId,
       isLoading,
       setIsLoading
     }}>
