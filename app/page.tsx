@@ -692,7 +692,7 @@ function ChatPage() {
                   </div>
                   <button
                     onClick={() => setShowUploadForm(true)}
-                    disabled={uploadingAgent && uploadingAgent !== selectedAgent.name}
+                    disabled={!!uploadingAgent && uploadingAgent !== selectedAgent.name}
                     className={`animated-button px-3 py-1.5 rounded-lg text-sm ${
                       uploadingAgent && uploadingAgent !== selectedAgent.name
                         ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-50'
@@ -708,7 +708,7 @@ function ChatPage() {
                       setCurrentConversationId(null)
                       setShowConversations(false)
                     }}
-                    disabled={uploadingAgent && uploadingAgent !== selectedAgent.name}
+                    disabled={!!uploadingAgent && uploadingAgent !== selectedAgent.name}
                     className={`animated-button px-3 py-1.5 rounded-lg text-sm ${
                       uploadingAgent && uploadingAgent !== selectedAgent.name
                         ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-50'
@@ -730,7 +730,7 @@ function ChatPage() {
                       }
                       setShowConversations(!showConversations)
                     }}
-                    disabled={uploadingAgent && uploadingAgent !== selectedAgent.name}
+                    disabled={!!uploadingAgent && uploadingAgent !== selectedAgent.name}
                     className={`animated-button px-3 py-1.5 rounded-lg text-sm ${
                       uploadingAgent && uploadingAgent !== selectedAgent.name
                         ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-50'
@@ -844,11 +844,11 @@ function ChatPage() {
                       ? `Upload in progress for ${uploadingAgent}. Please wait...` 
                       : `💬 Ask ${selectedAgent.name} anything...`}
                     className="animated-input w-full border border-gray-300 rounded-full px-5 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all duration-200 hover:shadow-md bg-white"
-                    disabled={isLoading || (uploadingAgent && uploadingAgent !== selectedAgent.name)}
+                    disabled={isLoading || (!!uploadingAgent && uploadingAgent !== selectedAgent.name)}
                   />
                   <button
                     type="submit"
-                    disabled={!input.trim() || isLoading || (uploadingAgent && uploadingAgent !== selectedAgent.name)}
+                    disabled={!input.trim() || isLoading || (!!uploadingAgent && uploadingAgent !== selectedAgent.name)}
                     className="animated-button absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-blue-600 text-white w-8 h-8 rounded-full hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg flex items-center justify-center"
                   >
                     {isLoading ? (
