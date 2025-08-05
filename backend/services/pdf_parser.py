@@ -42,7 +42,7 @@ class PDFParserService:
             chunk_overlap=300,  # More overlap to preserve relationships
             separator="\n\n",  # Split on paragraph breaks for markdown
             paragraph_separator="\n\n\n",  # Preserve section breaks
-            secondary_chunking_regex="[.!?]\s+"  # Fallback to sentence boundaries
+            secondary_chunking_regex=r"[.!?]\s+"  # Fallback to sentence boundaries
         )
     
     async def parse_pdf(self, file_path: str, original_filename: str) -> List[Dict[str, Any]]:
