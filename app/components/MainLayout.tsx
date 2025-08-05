@@ -21,7 +21,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Welcome, {user?.name || user?.email}
+                Welcome, {user?.email}
               </span>
               <button
                 onClick={logout}
