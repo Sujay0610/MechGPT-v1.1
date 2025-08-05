@@ -25,6 +25,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -40,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return
       }
 
-      const response = await axios.get('http://localhost:8000/auth/me', {
+      const response = await axios.get(`${API_BASE_URL}/auth/me`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -61,7 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post('http://localhost:8000/auth/login', {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
         email,
         password
       })
