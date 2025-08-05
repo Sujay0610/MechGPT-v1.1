@@ -4,7 +4,7 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 from pathlib import Path
 from pinecone import Pinecone, ServerlessSpec
-from sentence_transformers import SentenceTransformer
+from openai import OpenAI
 import uuid
 import time
 from config.supabase_client import get_supabase_client
@@ -19,16 +19,33 @@ class AgentService:
         if not self.pinecone_api_key:
             raise ValueError("PINECONE_API_KEY environment variable is required")
         
+        # Initialize OpenAI
+        self.openai_api_key = os.getenv('OPENAI_API_KEY')
+        if not self.openai_api_key:
+            raise ValueError("OPENAI_API_KEY environment variable is required")
+        
         self.pc = Pinecone(api_key=self.pinecone_api_key)
+        self.openai_client = OpenAI(api_key=self.openai_api_key)
         
         # Index configuration
         self.base_index_name = "mechagent-agents"
-        self.dimension = 384  # all-MiniLM-L6-v2 embedding dimension
-        
-        # Initialize embedding model
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        self.dimension = 1536  # OpenAI text-embedding-ada-002 dimension
+        self.embedding_model = "text-embedding-ada-002"
         
         print("Agent service initialized with Pinecone")
+    
+    async def _generate_embedding(self, text: str) -> List[float]:
+        """Generate embedding using OpenAI API"""
+        try:
+            response = await asyncio.to_thread(
+                self.openai_client.embeddings.create,
+                input=text,
+                model=self.embedding_model
+            )
+            return response.data[0].embedding
+        except Exception as e:
+            print(f"Error generating embedding: {e}")
+            raise
     
     def _get_agent_namespace(self, agent_name: str, user_id: str = None) -> str:
         """Generate a unique namespace for an agent"""
@@ -299,17 +316,13 @@ class AgentService:
                 # Ensure metadata is JSON serializable
                 clean_metadata = self._clean_metadata(metadata)
                 
-                # Generate embedding for this chunk
-                embedding = await asyncio.to_thread(
-                    self.embedding_model.encode, 
-                    [text], 
-                    convert_to_tensor=False
-                )
+                # Generate embedding using OpenAI
+                embedding = await self._generate_embedding(text)
                 
                 # Add to vectors list
                 vectors_to_upsert.append({
                     'id': chunk_id,
-                    'values': embedding[0].tolist(),
+                    'values': embedding,
                     'metadata': clean_metadata
                 })
             
@@ -362,16 +375,12 @@ class AgentService:
             # Get Pinecone index
             index = self.pc.Index(self.base_index_name)
             
-            # Generate query embedding
-            query_embedding = await asyncio.to_thread(
-                self.embedding_model.encode, 
-                [query], 
-                convert_to_tensor=False
-            )
+            # Generate query embedding using OpenAI
+            query_embedding = await self._generate_embedding(query)
             
             # Search Pinecone
             results = index.query(
-                vector=query_embedding[0].tolist(),
+                vector=query_embedding,
                 top_k=top_k,
                 namespace=namespace,
                 include_metadata=True
@@ -383,8 +392,8 @@ class AgentService:
                 for i, match in enumerate(results['matches']):
                     search_results.append({
                         "text": match.get('metadata', {}).get('text', ''),
-                        "metadata": match.get('metadata', {}),
-                        "similarity_score": match.get('score', 0),
+                        "metadata": {k: v for k, v in match.get('metadata', {}).items() if k != 'text'},
+                        "similarity_score": match['score'],
                         "rank": i + 1
                     })
             

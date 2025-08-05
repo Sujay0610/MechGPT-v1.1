@@ -5,7 +5,7 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 from pathlib import Path
 from pinecone import Pinecone, ServerlessSpec
-from sentence_transformers import SentenceTransformer
+from openai import OpenAI
 import uuid
 import time
 
@@ -16,14 +16,18 @@ class KnowledgeBaseService:
         if not self.pinecone_api_key:
             raise ValueError("PINECONE_API_KEY environment variable is required")
         
+        # Initialize OpenAI
+        self.openai_api_key = os.getenv('OPENAI_API_KEY')
+        if not self.openai_api_key:
+            raise ValueError("OPENAI_API_KEY environment variable is required")
+        
         self.pc = Pinecone(api_key=self.pinecone_api_key)
+        self.openai_client = OpenAI(api_key=self.openai_api_key)
         
         # Index configuration
         self.index_name = "mechagent-knowledge-base"
-        self.dimension = 384  # all-MiniLM-L6-v2 embedding dimension
-        
-        # Initialize embedding model
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        self.dimension = 1536  # OpenAI text-embedding-ada-002 dimension
+        self.embedding_model = "text-embedding-ada-002"
         
         # Create or connect to index
         self._setup_index()
@@ -48,14 +52,26 @@ class KnowledgeBaseService:
                     )
                 )
                 # Wait for index to be ready
-                while not self.pc.describe_index(self.index_name).status['ready']:
-                    time.sleep(1)
+                time.sleep(10)
             
-            # Connect to index
+            # Connect to the index
             self.index = self.pc.Index(self.index_name)
             
         except Exception as e:
             print(f"Error setting up Pinecone index: {e}")
+            raise
+    
+    async def _generate_embedding(self, text: str) -> List[float]:
+        """Generate embedding using OpenAI API"""
+        try:
+            response = await asyncio.to_thread(
+                self.openai_client.embeddings.create,
+                input=text,
+                model=self.embedding_model
+            )
+            return response.data[0].embedding
+        except Exception as e:
+            print(f"Error generating embedding: {e}")
             raise
     
     async def add_chunks(self, chunks: List[Dict[str, Any]]) -> int:
@@ -82,16 +98,12 @@ class KnowledgeBaseService:
                 # Add the text to metadata for retrieval
                 clean_metadata['text'] = text
                 
-                # Generate embedding
-                embedding = await asyncio.to_thread(
-                    self.embedding_model.encode, 
-                    text, 
-                    convert_to_tensor=False
-                )
+                # Generate embedding using OpenAI
+                embedding = await self._generate_embedding(text)
                 
                 vectors_to_upsert.append({
                     'id': chunk_id,
-                    'values': embedding.tolist(),
+                    'values': embedding,
                     'metadata': clean_metadata
                 })
             
@@ -119,16 +131,12 @@ class KnowledgeBaseService:
         Search the knowledge base for relevant chunks
         """
         try:
-            # Generate query embedding
-            query_embedding = await asyncio.to_thread(
-                self.embedding_model.encode, 
-                query, 
-                convert_to_tensor=False
-            )
+            # Generate query embedding using OpenAI
+            query_embedding = await self._generate_embedding(query)
             
             # Search Pinecone
             results = self.index.query(
-                vector=query_embedding.tolist(),
+                vector=query_embedding,
                 top_k=top_k,
                 include_metadata=True
             )
